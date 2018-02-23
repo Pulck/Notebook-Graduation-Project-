@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		84628507203FA6A100DF787B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84628506203FA6A100DF787B /* AppDelegate.swift */; };
-		84628509203FA6A100DF787B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84628508203FA6A100DF787B /* ViewController.swift */; };
 		8462850C203FA6A100DF787B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8462850A203FA6A100DF787B /* Main.storyboard */; };
 		8462850F203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8462850D203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld */; };
 		84628511203FA6A100DF787B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84628510203FA6A100DF787B /* Assets.xcassets */; };
 		84628514203FA6A100DF787B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84628512203FA6A100DF787B /* LaunchScreen.storyboard */; };
+		8462851E203FB41500DF787B /* TotalNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462851D203FB41500DF787B /* TotalNote.swift */; };
+		84628520203FB47200DF787B /* PlainTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462851F203FB47200DF787B /* PlainTextCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		84628503203FA6A100DF787B /* Notebook(Graduation Project).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notebook(Graduation Project).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84628506203FA6A100DF787B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84628508203FA6A100DF787B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8462850B203FA6A100DF787B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8462850E203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notebook_Graduation_Project_.xcdatamodel; sourceTree = "<group>"; };
 		84628510203FA6A100DF787B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84628513203FA6A100DF787B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84628515203FA6A100DF787B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8462851D203FB41500DF787B /* TotalNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalNote.swift; sourceTree = "<group>"; };
+		8462851F203FB47200DF787B /* PlainTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,24 @@
 		84628505203FA6A100DF787B /* Notebook(Graduation Project) */ = {
 			isa = PBXGroup;
 			children = (
-				84628506203FA6A100DF787B /* AppDelegate.swift */,
-				84628508203FA6A100DF787B /* ViewController.swift */,
+				8462851C203FA93600DF787B /* Supports Files */,
 				8462850A203FA6A100DF787B /* Main.storyboard */,
+				8462850D203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld */,
+				8462851D203FB41500DF787B /* TotalNote.swift */,
+				8462851F203FB47200DF787B /* PlainTextCell.swift */,
+			);
+			path = "Notebook(Graduation Project)";
+			sourceTree = "<group>";
+		};
+		8462851C203FA93600DF787B /* Supports Files */ = {
+			isa = PBXGroup;
+			children = (
+				84628506203FA6A100DF787B /* AppDelegate.swift */,
 				84628510203FA6A100DF787B /* Assets.xcassets */,
 				84628512203FA6A100DF787B /* LaunchScreen.storyboard */,
 				84628515203FA6A100DF787B /* Info.plist */,
-				8462850D203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld */,
 			);
-			path = "Notebook(Graduation Project)";
+			name = "Supports Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,8 +151,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8462850F203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld in Sources */,
-				84628509203FA6A100DF787B /* ViewController.swift in Sources */,
 				84628507203FA6A100DF787B /* AppDelegate.swift in Sources */,
+				8462851E203FB41500DF787B /* TotalNote.swift in Sources */,
+				84628520203FB47200DF787B /* PlainTextCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
