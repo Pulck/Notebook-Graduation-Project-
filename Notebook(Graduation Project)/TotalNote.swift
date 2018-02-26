@@ -10,13 +10,33 @@ import UIKit
 import Foundation
 
 class TotalNote: UITableViewController {
-
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchArea: UIStackView!
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var buttonArea: UIStackView!
+    
+    private lazy var dummyView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black
+        view.alpha = 0.3
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //自动计算cell的高度
+        //动态计算cell的高度
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
 
+        searchBar.delegate = self
+        searchBar.backgroundColor = UIColor.groupTableViewBackground
+        
+//        let searchResultController = UIStoryboard(name: "NoteContentSearchController", bundle: nil).instantiateViewController(withIdentifier: "Search Controller")
+//        searchController = UISearchController(searchResultsController: searchResultController)
+//        searchResultController.definesPresentationContext = true
+//        tableView.tableHeaderView = searchController.searchBar
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +53,7 @@ class TotalNote: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 10
     }
 
     
@@ -42,15 +62,17 @@ class TotalNote: UITableViewController {
         if let plainTextCell = cell as? PlainTextCell {
             
             plainTextCell.noteDateLabel.text = "1995/7/11"
-            plainTextCell.noteTitleLabel.text = "林腾涛"
-            plainTextCell.noteTextLabel.text = "傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼傻逼"
-            plainTextCell.appearMode = .small
+            plainTextCell.noteTitleLabel.text = "标题"
+            plainTextCell.noteTextLabel.text = "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
             plainTextCell.noteImages = [#imageLiteral(resourceName: "TestImage1"), #imageLiteral(resourceName: "TestImage2")]
+            plainTextCell.appearMode = .small
+            plainTextCell.appearMode = .large
+            plainTextCell.appearMode = .normal
+
         }
         return cell
     }
  
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -96,4 +118,39 @@ class TotalNote: UITableViewController {
     }
     */
 
+    @IBAction func noteButtonClick(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func notificationButtonClick(_ sender: UIButton) {
+        if sender.currentImage == #imageLiteral(resourceName: "notificationIcon") {
+            sender.setImage(#imageLiteral(resourceName: "notification_selected"), for: .normal)
+        } else {
+            sender.setImage(#imageLiteral(resourceName: "notificationIcon"), for: .normal)
+        }
+    }
+    
+    
+}
+
+extension TotalNote: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        self.view.addSubview(dummyView)
+        self.tableView.isScrollEnabled = false
+        dummyView.translatesAutoresizingMaskIntoConstraints = false
+        dummyView.topAnchor.constraint(equalTo: searchView.bottomAnchor).isActive = true
+        dummyView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        dummyView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        dummyView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        buttonArea.isHidden = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        dummyView.removeFromSuperview()
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: true)
+        tableView.isScrollEnabled = true
+        buttonArea.isHidden = false
+    }
 }

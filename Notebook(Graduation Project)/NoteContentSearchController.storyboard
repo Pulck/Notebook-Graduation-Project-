@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="77U-Gg-IZs">
+            <objects>
+                <viewController storyboardIdentifier="Search Controller" id="lO4-p7-wMK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="50v-6I-qhN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mkk-7X-5Lh">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mkk-7X-5Lh" firstAttribute="leading" secondItem="3lJ-0Y-Elq" secondAttribute="leading" id="flB-Ig-OA7"/>
+                            <constraint firstItem="mkk-7X-5Lh" firstAttribute="top" secondItem="3lJ-0Y-Elq" secondAttribute="top" id="sa2-cd-zGV"/>
+                            <constraint firstItem="mkk-7X-5Lh" firstAttribute="trailing" secondItem="3lJ-0Y-Elq" secondAttribute="trailing" id="zLL-PE-u1j"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3lJ-0Y-Elq"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qD3-QA-Cs8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121" y="-190"/>
+        </scene>
+    </scenes>
+</document>

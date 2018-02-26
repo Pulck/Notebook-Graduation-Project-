@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844A44C120414A7E00530851 /* NoteContentSearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A44BF20414A7E00530851 /* NoteContentSearchResultController.swift */; };
+		844A44C62041564900530851 /* NoteContentSearchController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844A44C52041564900530851 /* NoteContentSearchController.storyboard */; };
 		84628507203FA6A100DF787B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84628506203FA6A100DF787B /* AppDelegate.swift */; };
 		8462850C203FA6A100DF787B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8462850A203FA6A100DF787B /* Main.storyboard */; };
 		8462850F203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8462850D203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		844A44BF20414A7E00530851 /* NoteContentSearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentSearchResultController.swift; sourceTree = "<group>"; };
+		844A44C52041564900530851 /* NoteContentSearchController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NoteContentSearchController.storyboard; sourceTree = "<group>"; };
 		84628503203FA6A100DF787B /* Notebook(Graduation Project).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notebook(Graduation Project).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84628506203FA6A100DF787B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8462850B203FA6A100DF787B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 				8462850D203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld */,
 				8462851D203FB41500DF787B /* TotalNote.swift */,
 				8462851F203FB47200DF787B /* PlainTextCell.swift */,
+				844A44BF20414A7E00530851 /* NoteContentSearchResultController.swift */,
+				844A44C52041564900530851 /* NoteContentSearchController.storyboard */,
 			);
 			path = "Notebook(Graduation Project)";
 			sourceTree = "<group>";
@@ -137,6 +143,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844A44C62041564900530851 /* NoteContentSearchController.storyboard in Resources */,
 				84628514203FA6A100DF787B /* LaunchScreen.storyboard in Resources */,
 				84628511203FA6A100DF787B /* Assets.xcassets in Resources */,
 				8462850C203FA6A100DF787B /* Main.storyboard in Resources */,
@@ -153,6 +160,7 @@
 				8462850F203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld in Sources */,
 				84628507203FA6A100DF787B /* AppDelegate.swift in Sources */,
 				8462851E203FB41500DF787B /* TotalNote.swift in Sources */,
+				844A44C120414A7E00530851 /* NoteContentSearchResultController.swift in Sources */,
 				84628520203FB47200DF787B /* PlainTextCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
