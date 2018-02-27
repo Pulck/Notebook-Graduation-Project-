@@ -32,10 +32,7 @@ class TotalNote: UITableViewController {
         searchBar.delegate = self
         searchBar.backgroundColor = UIColor.groupTableViewBackground
         
-//        let searchResultController = UIStoryboard(name: "NoteContentSearchController", bundle: nil).instantiateViewController(withIdentifier: "Search Controller")
-//        searchController = UISearchController(searchResultsController: searchResultController)
-//        searchResultController.definesPresentationContext = true
-//        tableView.tableHeaderView = searchController.searchBar
+
         
     }
 
@@ -130,8 +127,23 @@ class TotalNote: UITableViewController {
         }
     }
     
+    var window: UIWindow!
+    @IBAction func showAppearOptions(_ sender: UIBarButtonItem) {
+//        let optionsView = UINib(nibName: "AppearOptionsView", bundle: Bundle.main).instantiate(withOwner: nil, options: nil).last as! AppearOptionsView
+        let application =  UIApplication.shared
+        window = UIWindow(frame: application.keyWindow!.frame)
+        
+        let viewController = UIStoryboard(name: "AppearOptionsViewController", bundle: Bundle.main).instantiateInitialViewController() as! AppearOptionsViewController
+        
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        
+        
+//        tableView.isScrollEnabled = false
+    }
     
 }
+
 
 extension TotalNote: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

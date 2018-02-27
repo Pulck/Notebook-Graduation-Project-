@@ -67,34 +67,34 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfc-rp-qL5">
-                                            <rect key="frame" x="0.0" y="5" width="0.0" height="133"/>
+                                            <rect key="frame" x="10" y="5" width="355" height="133"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3NB-PT-efs">
-                                                    <rect key="frame" x="0.0" y="10" width="0.0" height="113"/>
+                                                    <rect key="frame" x="10" y="10" width="335" height="113"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kvD-B5-DqZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="113"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="113"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWd-KN-uUw">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="16"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                     <color key="textColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="245" text="Title" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cL-2F-Hm4">
-                                                                    <rect key="frame" x="0.0" y="21" width="0.0" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="21" width="335" height="20.5"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="240" verticalCompressionResistancePriority="749" text="Text" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMA-xM-1s5">
-                                                                    <rect key="frame" x="0.0" y="46.5" width="0.0" height="11.5"/>
+                                                                    <rect key="frame" x="0.0" y="46.5" width="335" height="11.5"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="2ms-Px-yfg">
-                                                                    <rect key="frame" x="0.0" y="63" width="0.0" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="63" width="335" height="50"/>
                                                                 </stackView>
                                                             </subviews>
                                                         </stackView>
@@ -134,7 +134,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="All Notes" id="SHk-Vs-SBz">
-                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="ols-7t-SVJ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="ols-7t-SVJ">
+                            <connections>
+                                <action selector="showAppearOptions:" destination="0un-Jd-F8R" id="VbE-sz-qIU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonArea" destination="RpZ-88-x0R" id="mpE-qe-hRo"/>
@@ -145,7 +149,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9O-U7-LtW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="359.19999999999999" y="-80.50974512743629"/>
+            <point key="canvasLocation" x="479" y="-81"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e82-0G-cgz">
