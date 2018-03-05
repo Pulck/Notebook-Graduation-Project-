@@ -1,40 +1,75 @@
 //
-//  NoteContentSearchResultController.swift
+//  AppearOptionsPaneViewController.swift
 //  Notebook(Graduation Project)
 //
-//  Created by Colick on 2018/2/24.
+//  Created by Colick on 2018/2/28.
 //  Copyright © 2018年 The Big Nerd. All rights reserved.
 //
 
 import UIKit
 
-class NoteContentSearchResultController: UITableViewController {
-        
+class AppearOptionsPaneViewController: UITableViewController {
+
+    @IBOutlet var appearModebuttons: [UIButton]!
+    
+    weak var totalNote: TotalNote!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        var tag = 1
+        switch totalNote.appearModeIndicator.appearMode {
+        case .small:
+            tag = 0
+        case .normal:
+            tag = 1
+        case .large:
+            tag = 2
+        }
+        appearModebuttons[tag].backgroundColor = UIColor.green
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func appearModeSelect(_ sender: UIButton) {
+        changeAppearModeSelected(sender: sender)
     }
-
+    
+    func changeAppearModeSelected(sender: UIButton) {
+        sender.backgroundColor = UIColor.green
+        for button in appearModebuttons {
+            if button != sender && button.backgroundColor != UIColor.cyan {
+                button.backgroundColor = UIColor.cyan
+            }
+        }
+        updateImageAppearMode(sender: sender)
+    }
+    
+    ///通过主window经过navigation Controller接触total notes view Controller，用来更改显示模式，耦合太高，需要修改
+    func updateImageAppearMode(sender: UIButton) {
+        var mode = ImageAppearMode.normal
+        switch sender.tag {
+        case 0:
+            mode = .small
+        case 1:
+            mode = .normal
+        case 2:
+            mode = .large
+        default:
+            preconditionFailure("Illegal button tag!")
+        }
+        totalNote.appearModeIndicator.appearMode = mode
+        totalNote.tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return section + 1
     }
 
     /*
@@ -91,5 +126,8 @@ class NoteContentSearchResultController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+
+    deinit {
+        print("pane has deinited")
+    }
 }

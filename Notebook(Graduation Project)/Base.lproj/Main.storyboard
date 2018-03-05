@@ -59,21 +59,21 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Plain Text" rowHeight="143" id="ucQ-Ej-FR1" customClass="PlainTextCell" customModule="Notebook_Graduation_Project_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="375" height="143"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Plain Text" rowHeight="179" id="ucQ-Ej-FR1" customClass="NotePreviewCell" customModule="Notebook_Graduation_Project_" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="375" height="179"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ucQ-Ej-FR1" id="9Lv-G2-Y9J">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="143"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfc-rp-qL5">
-                                            <rect key="frame" x="10" y="5" width="355" height="133"/>
+                                            <rect key="frame" x="10" y="5" width="355" height="169"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3NB-PT-efs">
-                                                    <rect key="frame" x="10" y="10" width="335" height="113"/>
+                                                    <rect key="frame" x="10" y="10" width="335" height="149"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kvD-B5-DqZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="113"/>
+                                                            <rect key="frame" x="0.0" y="13.5" width="335" height="122"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWd-KN-uUw">
                                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="16"/>
@@ -88,13 +88,13 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="240" verticalCompressionResistancePriority="749" text="Text" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMA-xM-1s5">
-                                                                    <rect key="frame" x="0.0" y="46.5" width="335" height="11.5"/>
+                                                                    <rect key="frame" x="0.0" y="46.5" width="335" height="20.5"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="2ms-Px-yfg">
-                                                                    <rect key="frame" x="0.0" y="63" width="335" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="72" width="335" height="50"/>
                                                                 </stackView>
                                                             </subviews>
                                                         </stackView>
@@ -149,7 +149,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9O-U7-LtW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="479" y="-81"/>
+            <point key="canvasLocation" x="477.60000000000002" y="-81.409295352323838"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e82-0G-cgz">
