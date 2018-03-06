@@ -14,6 +14,8 @@ class AppearOptionsViewController: UIViewController {
     @IBOutlet weak var optionsPane: UIView!
     @IBOutlet weak var height: NSLayoutConstraint!
     
+    weak var window: AppearOptionsWindow!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,10 +38,10 @@ class AppearOptionsViewController: UIViewController {
     }
     
     func presentOptionsPane() {
-        //height.constant = -UIScreen.main.bounds.height * 2.0 / 3
+//        height.constant = -UIScreen.main.bounds.height * 2.0 / 3//测试弹出动画需要取消注释
         UIView.animate(withDuration: 0.3) {
             self.coverView.alpha = 0.3
-            //self.view.layoutIfNeeded()
+//            self.view.layoutIfNeeded()//测试弹出动画需要取消注释
         }
     }
     
@@ -48,7 +50,7 @@ class AppearOptionsViewController: UIViewController {
         height.constant = 0
         UIView.animate(withDuration: 0.2, animations: {
             self.coverView.alpha = 0.0
-            self.view.layoutIfNeeded()
+//            self.view.layoutIfNeeded()//测试弹出动画需要取消注释
         }) { (finished) in
             if finished {
                 window?.makeKeyAndVisible()
@@ -56,14 +58,21 @@ class AppearOptionsViewController: UIViewController {
         }
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "Container segue", let paneVC = segue.destination as? AppearOptionsPaneViewController {
+            paneVC.totalNote = window.totalNote
+        }
     }
-    */
+    
+    deinit {
+        print("appear otpions view controller has deinit")
+    }
 
 }
