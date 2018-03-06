@@ -16,6 +16,8 @@ class TotalNote: UITableViewController {
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var buttonArea: UIStackView!
     
+    let appearModeIndicator = ImageAppearModeIndicator()
+    
     private lazy var dummyView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black
@@ -31,14 +33,6 @@ class TotalNote: UITableViewController {
 
         searchBar.delegate = self
         searchBar.backgroundColor = UIColor.groupTableViewBackground
-        
-
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -50,21 +44,20 @@ class TotalNote: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return 80
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Plain Text", for: indexPath)
-        if let plainTextCell = cell as? PlainTextCell {
+        
+        if let plainTextCell = cell as? NotePreviewCell {
             
             plainTextCell.noteDateLabel.text = "1995/7/11"
             plainTextCell.noteTitleLabel.text = "标题"
             plainTextCell.noteTextLabel.text = "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
-            plainTextCell.noteImages = [#imageLiteral(resourceName: "TestImage1"), #imageLiteral(resourceName: "TestImage2")]
-            plainTextCell.appearMode = .small
-            plainTextCell.appearMode = .large
-            plainTextCell.appearMode = .normal
+            plainTextCell.noteImages = [#imageLiteral(resourceName: "TestImage1"), #imageLiteral(resourceName: "TestImage2"), #imageLiteral(resourceName: "TestImage3")]
+            plainTextCell.appearModeIndicator = appearModeIndicator
 
         }
         return cell
@@ -127,21 +120,27 @@ class TotalNote: UITableViewController {
         }
     }
     
-    var window: UIWindow!
-    @IBAction func showAppearOptions(_ sender: UIBarButtonItem) {
-//        let optionsView = UINib(nibName: "AppearOptionsView", bundle: Bundle.main).instantiate(withOwner: nil, options: nil).last as! AppearOptionsView
+    lazy var window: AppearOptionsWindow! = {
         let application =  UIApplication.shared
-        window = UIWindow(frame: application.keyWindow!.frame)
+        let window = AppearOptionsWindow(frame: application.keyWindow!.frame)
         
-        let viewController = UIStoryboard(name: "AppearOptionsViewController", bundle: Bundle.main).instantiateInitialViewController() as! AppearOptionsViewController
+        let viewController = UIStoryboard(name: "AppearOptions", bundle: Bundle.main).instantiateInitialViewController() as! AppearOptionsViewController
         
+        /*window在此处对AppearOptionsViewController、totalNote即self都产生了强引用；与此同时AppearOptionsViewController对window也产生了强引用，形成了强引用循环，此处在AppearOptionsViewController中将对window的引用改为weak；window是totalNote这个self中的属性，所以self引用window，window引用self，循环再次产生，此处将window中的对totalNote的引用改为weak；综上所有此处产生的循环强引用得到了解决
+         */
         window.rootViewController = viewController
+        viewController.window = window
+        window.totalNote = self
+        return window
+    }()
+    
+    @IBAction func showAppearOptions(_ sender: UIBarButtonItem) {
         window.makeKeyAndVisible()
-        
-        
-//        tableView.isScrollEnabled = false
     }
     
+    deinit {
+        print("total note has deinited")
+    }
 }
 
 
