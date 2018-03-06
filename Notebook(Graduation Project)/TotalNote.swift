@@ -21,7 +21,7 @@ class TotalNote: UITableViewController {
     private lazy var dummyView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black
-        view.alpha = 0.3
+        view.alpha = 0.0
         return view
     }()
     
@@ -33,6 +33,43 @@ class TotalNote: UITableViewController {
 
         searchBar.delegate = self
         searchBar.backgroundColor = UIColor.groupTableViewBackground
+        
+        //添加dummy视图，用于在键盘弹出后遮挡tableview
+        self.view.addSubview(dummyView)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(endSearch))
+        dummyView.addGestureRecognizer(tapGesture)
+        dummyView.isHidden = true
+        dummyView.translatesAutoresizingMaskIntoConstraints = false
+        dummyView.topAnchor.constraint(equalTo: searchView.bottomAnchor).isActive = true
+        dummyView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        dummyView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        dummyView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+    }
+    
+    func startSearch() {
+        buttonArea.isHidden = true
+        searchBar.setShowsCancelButton(true, animated: true)
+
+        dummyView.isHidden = false
+        tableView.isScrollEnabled = false
+        UIView.animate(withDuration: 0.3) {
+            self.dummyView.alpha = 0.3
+        }
+    }
+    
+    @objc func endSearch() {
+        searchBar.setShowsCancelButton(false, animated: false)
+        searchBar.resignFirstResponder()
+        buttonArea.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.dummyView.alpha = 0.0
+        }) { (finished) in
+            if finished {
+                self.dummyView.isHidden = true
+                self.tableView.isScrollEnabled = true
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -146,22 +183,11 @@ class TotalNote: UITableViewController {
 
 extension TotalNote: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-        self.view.addSubview(dummyView)
-        self.tableView.isScrollEnabled = false
-        dummyView.translatesAutoresizingMaskIntoConstraints = false
-        dummyView.topAnchor.constraint(equalTo: searchView.bottomAnchor).isActive = true
-        dummyView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        dummyView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        dummyView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        buttonArea.isHidden = true
+        startSearch()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
-        dummyView.removeFromSuperview()
-        searchBar.resignFirstResponder()
-        tableView.isScrollEnabled = true
-        buttonArea.isHidden = false
+        endSearch()
+
     }
 }
