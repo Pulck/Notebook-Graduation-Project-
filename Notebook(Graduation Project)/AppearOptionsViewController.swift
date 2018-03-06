@@ -29,11 +29,7 @@ class AppearOptionsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func back(_ sender: UIButton) {
-        resignOptionsPane()
-    }
-    
-    @IBAction func quitOptionsPane(_ sender: UIButton) {
+    @IBAction func closeButtonClick(_ sender: UIButton) {
         resignOptionsPane()
     }
     

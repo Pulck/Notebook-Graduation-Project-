@@ -70,8 +70,8 @@
 		84628505203FA6A100DF787B /* Notebook(Graduation Project) */ = {
 			isa = PBXGroup;
 			children = (
-				849E7884204E21D900F219A5 /* Total Notebooks */,
 				8462850A203FA6A100DF787B /* Main.storyboard */,
+				849E7884204E21D900F219A5 /* Total Notebooks */,
 				84DFC89620466FA900D3B288 /* ApeearOptionsView */,
 				84DFC8982046708B00D3B288 /* Data Base */,
 				8462851C203FA93600DF787B /* Supports Files */,

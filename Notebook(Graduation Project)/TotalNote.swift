@@ -158,9 +158,9 @@ extension TotalNote: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
         dummyView.removeFromSuperview()
         searchBar.resignFirstResponder()
-        searchBar.setShowsCancelButton(false, animated: true)
         tableView.isScrollEnabled = true
         buttonArea.isHidden = false
     }

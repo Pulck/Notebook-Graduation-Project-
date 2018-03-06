@@ -9,15 +9,23 @@
 import UIKit
 
 class TotalNotebooksViewController: UITableViewController {
+    
+    @IBOutlet var searchBar: UISearchBar!
+    var data = [[1], [20]]
+    var lastIndexPath: IndexPath {
+        return IndexPath(row: data[1][0] - 1, section: 1)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.titleView = searchBar
+        searchBar.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,14 +36,12 @@ class TotalNotebooksViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return data.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        return 10
+        
+        return data[section][0]
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -46,27 +52,43 @@ class TotalNotebooksViewController: UITableViewController {
         return nil
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Notebook Cell", for: indexPath)
         
         if let noteCell = cell as? NotebookCell {
             if indexPath.section == 0 {
-                noteCell.imageView?.image = #imageLiteral(resourceName: "Note")
+                noteCell.notebookImageView?.image = #imageLiteral(resourceName: "Note")
                 noteCell.noteTitle.text = "All Notes"
+                noteCell.separatorLine.isHidden = true
             } else if indexPath.section == 1 {
-                noteCell.imageView?.image = #imageLiteral(resourceName: "Notebook")
-                noteCell.noteTitle.text = "Notebook"
+                if indexPath == lastIndexPath {
+                    noteCell.notebookImageView?.image = #imageLiteral(resourceName: "Trash")
+                    noteCell.noteTitle.text = "Trash"
+                    noteCell.separatorLine.isHidden = true
+                } else {
+                    noteCell.notebookImageView?.image = #imageLiteral(resourceName: "Notebook")
+                    noteCell.noteTitle.text = "Notebook"
+                    noteCell.separatorLine.isHidden = false
+                }
             }
             noteCell.noteCount.text = "(\(indexPath.row))"
             return noteCell
         }
-        // Configure the cell...
 
         return cell
     }
  
-
+    var selectedIndexpath: IndexPath!
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        selectedIndexpath = indexPath
+        searchBar.resignFirstResponder()
+        return indexPath
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -107,9 +129,26 @@ class TotalNotebooksViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Select Notebook", let notesVC = segue.destination as? TotalNote {
-            let cell = tableView(tableView, cellForRowAt: tableView.indexPathForSelectedRow!) as! NotebookCell
-            notesVC.title = cell.noteTitle.text
+            var title: String?
+            if selectedIndexpath.section == 0 {
+                title = "Notebook"
+            } else if selectedIndexpath.row == data[1][0] - 1 {
+                title = "Trash"
+            } else {
+                title = "Total Notes"
+            }
+            notesVC.title = title
         }
     }
+}
 
+extension TotalNotebooksViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+    }
 }

@@ -13,10 +13,13 @@ class NotebookCell: UITableViewCell {
     @IBOutlet weak var notebookImageView: UIImageView!
     @IBOutlet weak var noteTitle: UILabel!
     @IBOutlet weak var noteCount: UILabel!
+    @IBOutlet weak var separatorLine: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        notebookImageView.layer.cornerRadius = 3.0
+        notebookImageView.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
