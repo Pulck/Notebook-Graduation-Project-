@@ -254,6 +254,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="hVc-Rz-ubR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="edP-rr-HHH">
+                            <connections>
+                                <action selector="optionButtonClick:" destination="0un-Jd-F8R" id="j1v-ee-TZD"/>
+                            </connections>
+                        </barButtonItem>
                         <connections>
                             <outlet property="backBarButtonItem" destination="Xyl-0v-A1c" id="oVB-Ht-qvm"/>
                         </connections>

@@ -23,7 +23,6 @@ class TotalNotebooksViewController: UITableViewController {
         
         navigationItem.titleView = searchBar
         searchBar.delegate = self
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,13 +91,15 @@ class TotalNotebooksViewController: UITableViewController {
         }
         return UITableViewAutomaticDimension
     }
-    /*
+
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        if indexPath.section == 0 || indexPath == lastIndexPath {
+            return false
+        } else {
+            return true
+        }
     }
-    */
 
     /*
     // Override to support editing the table view.
@@ -126,6 +127,24 @@ class TotalNotebooksViewController: UITableViewController {
         return true
     }
     */
+    
+    //左滑按钮
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Test") { (action, view, vertify) in
+//            if condition {
+//                vertify(true)
+//            } else {
+//                vertify(false)
+//            }
+            if let vc = UIStoryboard(name: "NotebookSettings", bundle: nil).instantiateInitialViewController() {
+                self.present(vc, animated: true, completion: nil)
+            }
+            self.setEditing(false, animated: true)
+        }
+
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
 
     // MARK: - Navigation
 
@@ -133,15 +152,25 @@ class TotalNotebooksViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Select Notebook", let notesVC = segue.destination as? TotalNote {
             var title: String?
+            var listType: ListType?
             if selectedIndexpath.section == 0 {
                 title = "All Notes"
+                listType = .note
             } else if selectedIndexpath.row == data[1][0] - 1 {
                 title = "Trash"
+                listType = .trash
             } else {
                 title = "Notebook"
+                listType = .notebook
             }
+            
             notesVC.title = title
+            notesVC.listType = listType
         }
+    }
+    
+    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {
+        
     }
 }
 

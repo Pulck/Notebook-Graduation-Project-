@@ -44,7 +44,6 @@ class TotalNote: UITableViewController {
         dummyView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         dummyView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         dummyView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
     }
     
     func startSearch() {
@@ -172,9 +171,56 @@ class TotalNote: UITableViewController {
         return window
     }()
     
-    @IBAction func showAppearOptions(_ sender: UIBarButtonItem) {
+    var listType: ListType?
+    @IBAction func optionButtonClick(_ sender: UIBarButtonItem) {
+        guard let type = listType else {
+            return
+        }
+        
+        switch type {
+        case .note:
+            presentAppearOptionsWindow()
+        case .notebook, .trash:
+            presentOptionsSheet()
+        }
+    }
+    
+    func presentAppearOptionsWindow() {
         window.makeKeyAndVisible()
     }
+    
+    func presentOptionsSheet() {
+        assert(listType != .note, "Illegal list type!")
+        
+        let alterController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet
+        )
+        
+        let appearOptionsAction = UIAlertAction(title: "Appear Options", style: .default) { (action) in
+            self.presentAppearOptionsWindow()
+        }
+        alterController.addAction(appearOptionsAction)
+        
+        if listType == .trash {
+            let removeAction = UIAlertAction(title: "Remove All", style: .default) { (action) in
+                
+            }
+            alterController.addAction(removeAction)
+        } else {
+            let notebookOptionsAction = UIAlertAction(title: "Notebook Options", style: .default) { (action) in
+                
+            }
+            alterController.addAction(notebookOptionsAction)
+        }
+        
+        let addShortcutAction = UIAlertAction(title: "Add To Shortcut", style: .default, handler: nil)
+        alterController.addAction(addShortcutAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alterController.addAction(cancelAction)
+        
+        present(alterController, animated: true, completion: nil)
+    }
+    
     
     deinit {
         print("total note has deinited")
@@ -189,6 +235,11 @@ extension TotalNote: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         endSearch()
-
     }
+}
+
+enum ListType {
+    case note
+    case notebook
+    case trash
 }
