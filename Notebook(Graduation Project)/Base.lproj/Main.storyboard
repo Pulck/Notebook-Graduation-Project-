@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -79,8 +80,13 @@
                             <outlet property="delegate" destination="PPk-Zi-mNS" id="Spc-F8-YuJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="4dg-yW-pWH"/>
+                    <navigationItem key="navigationItem" id="4dg-yW-pWH">
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="GEd-71-KNy" id="P3o-Qq-pjJ"/>
+                        </connections>
+                    </navigationItem>
                     <connections>
+                        <outlet property="notebookHeaderView" destination="Ao9-w7-7q7" id="JXz-pH-i8T"/>
                         <outlet property="searchBar" destination="eTL-C7-UQU" id="YeG-qe-mXB"/>
                     </connections>
                 </tableViewController>
@@ -90,10 +96,40 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
+                <view contentMode="scaleToFill" id="Ao9-w7-7q7" customClass="NotebookHeaderView" customModule="Notebook_Graduation_Project_" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-4Z-rDd">
+                            <rect key="frame" x="20" y="19.5" width="78.5" height="21"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAc-0c-QSB">
+                            <rect key="frame" x="333" y="19" width="22" height="22"/>
+                            <connections>
+                                <action selector="addButtonClick:" destination="Ao9-w7-7q7" eventType="touchUpInside" id="tqf-sH-RTa"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="OAc-0c-QSB" firstAttribute="centerY" secondItem="Ao9-w7-7q7" secondAttribute="centerY" id="OQg-x8-0gL"/>
+                        <constraint firstItem="EgS-4Z-rDd" firstAttribute="leading" secondItem="3gc-s5-ole" secondAttribute="leading" constant="20" id="Vyq-oU-fU7"/>
+                        <constraint firstItem="3gc-s5-ole" firstAttribute="trailing" secondItem="OAc-0c-QSB" secondAttribute="trailing" constant="20" id="qDP-bl-XK3"/>
+                        <constraint firstItem="EgS-4Z-rDd" firstAttribute="centerY" secondItem="3gc-s5-ole" secondAttribute="centerY" id="vX9-Vx-JUX"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="3gc-s5-ole"/>
+                    <connections>
+                        <outlet property="title" destination="EgS-4Z-rDd" id="whf-xW-k56"/>
+                    </connections>
+                </view>
+                <barButtonItem id="GEd-71-KNy"/>
             </objects>
             <point key="canvasLocation" x="-63.200000000000003" y="-99.400299850074973"/>
         </scene>
-        <!--Total Note-->
+        <!--Title-->
         <scene sceneID="6JZ-mP-NFe">
             <objects>
                 <tableViewController storyboardIdentifier="Total Note" id="0un-Jd-F8R" customClass="TotalNote" customModule="Notebook_Graduation_Project_" customModuleProvider="target" sceneMemberID="viewController">
@@ -143,21 +179,21 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Plain Text" rowHeight="179" id="ucQ-Ej-FR1" customClass="NotePreviewCell" customModule="Notebook_Graduation_Project_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="375" height="179"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Plain Text" rowHeight="197" id="ucQ-Ej-FR1" customClass="NotePreviewCell" customModule="Notebook_Graduation_Project_" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="375" height="197"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ucQ-Ej-FR1" id="9Lv-G2-Y9J">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfc-rp-qL5">
-                                            <rect key="frame" x="0.0" y="5" width="0.0" height="169"/>
+                                            <rect key="frame" x="0.0" y="5" width="0.0" height="187"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3NB-PT-efs">
-                                                    <rect key="frame" x="0.0" y="10" width="0.0" height="149"/>
+                                                    <rect key="frame" x="0.0" y="10" width="0.0" height="167"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kvD-B5-DqZ">
-                                                            <rect key="frame" x="0.0" y="13.5" width="0.0" height="122"/>
+                                                            <rect key="frame" x="0.0" y="22.5" width="0.0" height="122"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWd-KN-uUw">
                                                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="16"/>
@@ -217,12 +253,10 @@
                             <outlet property="delegate" destination="0un-Jd-F8R" id="ms1-6N-CE8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="SHk-Vs-SBz">
-                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="ols-7t-SVJ">
-                            <connections>
-                                <action selector="showAppearOptions:" destination="0un-Jd-F8R" id="VbE-sz-qIU"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Title" id="hVc-Rz-ubR">
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="Xyl-0v-A1c" id="oVB-Ht-qvm"/>
+                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonArea" destination="RpZ-88-x0R" id="mpE-qe-hRo"/>
@@ -232,8 +266,9 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9O-U7-LtW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem id="Xyl-0v-A1c"/>
             </objects>
-            <point key="canvasLocation" x="817" y="-99"/>
+            <point key="canvasLocation" x="816.79999999999995" y="-99.400299850074973"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e82-0G-cgz">

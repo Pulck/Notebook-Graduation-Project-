@@ -11,6 +11,8 @@ import UIKit
 class TotalNotebooksViewController: UITableViewController {
     
     @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var notebookHeaderView: UIView!
+    
     var data = [[1], [20]]
     var lastIndexPath: IndexPath {
         return IndexPath(row: data[1][0] - 1, section: 1)
@@ -19,10 +21,6 @@ class TotalNotebooksViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         navigationItem.titleView = searchBar
         searchBar.delegate = self
         
@@ -42,14 +40,6 @@ class TotalNotebooksViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return data[section][0]
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "NoteBook"
-        }
-        
-        return nil
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -89,6 +79,19 @@ class TotalNotebooksViewController: UITableViewController {
         return indexPath
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            return notebookHeaderView
+        }
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 60
+        }
+        return UITableViewAutomaticDimension
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -131,11 +134,11 @@ class TotalNotebooksViewController: UITableViewController {
         if segue.identifier == "Select Notebook", let notesVC = segue.destination as? TotalNote {
             var title: String?
             if selectedIndexpath.section == 0 {
-                title = "Notebook"
+                title = "All Notes"
             } else if selectedIndexpath.row == data[1][0] - 1 {
                 title = "Trash"
             } else {
-                title = "Total Notes"
+                title = "Notebook"
             }
             notesVC.title = title
         }

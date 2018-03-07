@@ -17,6 +17,7 @@
 		84685638204D0FFB006E23F8 /* AppearOptionsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84685637204D0FFB006E23F8 /* AppearOptionsWindow.swift */; };
 		849E7886204E222200F219A5 /* TotalNotebooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E7885204E222200F219A5 /* TotalNotebooksViewController.swift */; };
 		849E7888204E233700F219A5 /* NotebookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E7887204E233700F219A5 /* NotebookCell.swift */; };
+		849E788A204E84A500F219A5 /* NotebookHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E7889204E84A500F219A5 /* NotebookHeaderView.swift */; };
 		84B888C72045347D00388C51 /* AppearOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B888C62045347D00388C51 /* AppearOptionsViewController.swift */; };
 		84DFC89520466D5B00D3B288 /* AppearOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84DFC89420466D5A00D3B288 /* AppearOptions.storyboard */; };
 		84DFC89A2046735F00D3B288 /* AppearOptionsPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFC8992046735F00D3B288 /* AppearOptionsPaneViewController.swift */; };
@@ -35,6 +36,7 @@
 		84685637204D0FFB006E23F8 /* AppearOptionsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearOptionsWindow.swift; sourceTree = "<group>"; };
 		849E7885204E222200F219A5 /* TotalNotebooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalNotebooksViewController.swift; sourceTree = "<group>"; };
 		849E7887204E233700F219A5 /* NotebookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCell.swift; sourceTree = "<group>"; };
+		849E7889204E84A500F219A5 /* NotebookHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookHeaderView.swift; sourceTree = "<group>"; };
 		84B888C62045347D00388C51 /* AppearOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearOptionsViewController.swift; sourceTree = "<group>"; };
 		84DFC89420466D5A00D3B288 /* AppearOptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AppearOptions.storyboard; sourceTree = "<group>"; };
 		84DFC8992046735F00D3B288 /* AppearOptionsPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearOptionsPaneViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				849E7885204E222200F219A5 /* TotalNotebooksViewController.swift */,
 				849E7887204E233700F219A5 /* NotebookCell.swift */,
+				849E7889204E84A500F219A5 /* NotebookHeaderView.swift */,
 			);
 			name = "Total Notebooks";
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				8462850F203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld in Sources */,
 				84628507203FA6A100DF787B /* AppDelegate.swift in Sources */,
 				84DFC89A2046735F00D3B288 /* AppearOptionsPaneViewController.swift in Sources */,
+				849E788A204E84A500F219A5 /* NotebookHeaderView.swift in Sources */,
 				8462851E203FB41500DF787B /* TotalNote.swift in Sources */,
 				849E7886204E222200F219A5 /* TotalNotebooksViewController.swift in Sources */,
 				84B888C72045347D00388C51 /* AppearOptionsViewController.swift in Sources */,
