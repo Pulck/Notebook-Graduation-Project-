@@ -21,6 +21,9 @@
 		84B888C72045347D00388C51 /* AppearOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B888C62045347D00388C51 /* AppearOptionsViewController.swift */; };
 		84DFC89520466D5B00D3B288 /* AppearOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84DFC89420466D5A00D3B288 /* AppearOptions.storyboard */; };
 		84DFC89A2046735F00D3B288 /* AppearOptionsPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFC8992046735F00D3B288 /* AppearOptionsPaneViewController.swift */; };
+		84E15CBC2053CA3800C4246D /* NotebookGroupSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E15CBB2053CA3800C4246D /* NotebookGroupSetting.swift */; };
+		84E15CC02053FFA900C4246D /* ShortcutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E15CBF2053FFA900C4246D /* ShortcutViewController.swift */; };
+		84E15CC220542FD700C4246D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E15CC120542FD700C4246D /* TabBarController.swift */; };
 		84EF514B204FBAFA00E7A202 /* NotebookSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EF514A204FBAFA00E7A202 /* NotebookSettings.storyboard */; };
 		84EF514D204FC67C00E7A202 /* NotebookSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF514C204FC67C00E7A202 /* NotebookSettingsController.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +45,9 @@
 		84B888C62045347D00388C51 /* AppearOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearOptionsViewController.swift; sourceTree = "<group>"; };
 		84DFC89420466D5A00D3B288 /* AppearOptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AppearOptions.storyboard; sourceTree = "<group>"; };
 		84DFC8992046735F00D3B288 /* AppearOptionsPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearOptionsPaneViewController.swift; sourceTree = "<group>"; };
+		84E15CBB2053CA3800C4246D /* NotebookGroupSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookGroupSetting.swift; sourceTree = "<group>"; };
+		84E15CBF2053FFA900C4246D /* ShortcutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutViewController.swift; sourceTree = "<group>"; };
+		84E15CC120542FD700C4246D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		84EF514A204FBAFA00E7A202 /* NotebookSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotebookSettings.storyboard; sourceTree = "<group>"; };
 		84EF514C204FC67C00E7A202 /* NotebookSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookSettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,12 +83,11 @@
 			isa = PBXGroup;
 			children = (
 				8462850A203FA6A100DF787B /* Main.storyboard */,
-				84EF5149204FBABC00E7A202 /* Notebook Settings */,
-				849E7884204E21D900F219A5 /* Total Notebooks */,
-				84DFC89620466FA900D3B288 /* ApeearOptionsView */,
+				84E15CC120542FD700C4246D /* TabBarController.swift */,
+				84E15CBE2053F9F600C4246D /* Shortcut */,
+				84E15CBD2053EA9500C4246D /* Notebook */,
 				84DFC8982046708B00D3B288 /* Data Base */,
 				8462851C203FA93600DF787B /* Supports Files */,
-				84DFC8972046703E00D3B288 /* Total Notes  */,
 			);
 			path = "Notebook(Graduation Project)";
 			sourceTree = "<group>";
@@ -136,11 +141,31 @@
 			name = "Data Base";
 			sourceTree = "<group>";
 		};
+		84E15CBD2053EA9500C4246D /* Notebook */ = {
+			isa = PBXGroup;
+			children = (
+				84EF5149204FBABC00E7A202 /* Notebook Settings */,
+				849E7884204E21D900F219A5 /* Total Notebooks */,
+				84DFC89620466FA900D3B288 /* ApeearOptionsView */,
+				84DFC8972046703E00D3B288 /* Total Notes  */,
+			);
+			name = Notebook;
+			sourceTree = "<group>";
+		};
+		84E15CBE2053F9F600C4246D /* Shortcut */ = {
+			isa = PBXGroup;
+			children = (
+				84E15CBF2053FFA900C4246D /* ShortcutViewController.swift */,
+			);
+			name = Shortcut;
+			sourceTree = "<group>";
+		};
 		84EF5149204FBABC00E7A202 /* Notebook Settings */ = {
 			isa = PBXGroup;
 			children = (
 				84EF514A204FBAFA00E7A202 /* NotebookSettings.storyboard */,
 				84EF514C204FC67C00E7A202 /* NotebookSettingsController.swift */,
+				84E15CBB2053CA3800C4246D /* NotebookGroupSetting.swift */,
 			);
 			name = "Notebook Settings";
 			sourceTree = "<group>";
@@ -220,14 +245,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				849E7888204E233700F219A5 /* NotebookCell.swift in Sources */,
+				84E15CBC2053CA3800C4246D /* NotebookGroupSetting.swift in Sources */,
 				8462850F203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld in Sources */,
 				84628507203FA6A100DF787B /* AppDelegate.swift in Sources */,
+				84E15CC02053FFA900C4246D /* ShortcutViewController.swift in Sources */,
 				84DFC89A2046735F00D3B288 /* AppearOptionsPaneViewController.swift in Sources */,
 				84EF514D204FC67C00E7A202 /* NotebookSettingsController.swift in Sources */,
 				849E788A204E84A500F219A5 /* NotebookHeaderView.swift in Sources */,
 				8462851E203FB41500DF787B /* TotalNote.swift in Sources */,
 				849E7886204E222200F219A5 /* TotalNotebooksViewController.swift in Sources */,
 				84B888C72045347D00388C51 /* AppearOptionsViewController.swift in Sources */,
+				84E15CC220542FD700C4246D /* TabBarController.swift in Sources */,
 				84628520203FB47200DF787B /* NotePreviewCell.swift in Sources */,
 				84685638204D0FFB006E23F8 /* AppearOptionsWindow.swift in Sources */,
 			);
