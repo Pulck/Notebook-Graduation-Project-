@@ -14,7 +14,7 @@ class AppearOptionsPaneViewController: UITableViewController {
     @IBOutlet var previewOptions: [UITableViewCell]!
     @IBOutlet var sortOptions: [UITableViewCell]!
     
-    weak var totalNote: TotalNote!
+    weak var totalNote: NoteListViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,14 +8,16 @@
 
 import UIKit
 import Foundation
+import CoreData
 
-class TotalNote: UITableViewController {
+class NoteListViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchArea: UIStackView!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var buttonArea: UIStackView!
     
+    let context = AppDelegate.viewContext
     let appearModeIndicator = ImageAppearModeIndicator()
     
     private lazy var dummyView: UIView = {
@@ -228,7 +230,7 @@ class TotalNote: UITableViewController {
 }
 
 
-extension TotalNote: UISearchBarDelegate {
+extension NoteListViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         startSearch()
     }
@@ -236,6 +238,10 @@ extension TotalNote: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         endSearch()
     }
+}
+
+extension NoteListViewController: NoteBookHeaderDelegate {
+    
 }
 
 enum ListType {

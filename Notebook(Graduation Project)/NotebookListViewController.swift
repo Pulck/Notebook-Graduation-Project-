@@ -7,11 +7,25 @@
 //
 
 import UIKit
+import CoreData
 
-class TotalNotebooksViewController: UITableViewController {
+class NotebookListViewController: UITableViewController {
     
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var notebookHeaderView: UIView!
+    
+    var fetchedResultController: NSFetchedResultsController = {
+        let context = AppDelegate.viewContext
+        let fetchRequest = Notebook.fetchRequest()
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            try controller.performFetch()
+        } catch {
+            fatalError("Failed to fetch entities: \(error)")
+        }
+    }()
     
     var data = [[1], [20]]
     var lastIndexPath: IndexPath {
@@ -150,7 +164,7 @@ class TotalNotebooksViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Select Notebook", let notesVC = segue.destination as? TotalNote {
+        if segue.identifier == "Select Notebook", let notesVC = segue.destination as? NoteListViewController {
             var title: String?
             var listType: ListType?
             if selectedIndexpath.section == 0 {
@@ -174,7 +188,7 @@ class TotalNotebooksViewController: UITableViewController {
     }
 }
 
-extension TotalNotebooksViewController: UISearchBarDelegate {
+extension NotebookListViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }

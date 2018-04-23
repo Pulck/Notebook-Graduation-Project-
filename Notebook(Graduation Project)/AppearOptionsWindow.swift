@@ -9,7 +9,7 @@
 import UIKit
 
 class AppearOptionsWindow: UIWindow {
-    weak var totalNote: TotalNote!
+    weak var totalNote: NoteListViewController!
     
     //覆盖用来在切换window时，保证选项面板的弹出动画正常播放
     override func makeKeyAndVisible() {
