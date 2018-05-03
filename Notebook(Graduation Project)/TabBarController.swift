@@ -50,7 +50,11 @@ extension TabBarController: UITabBarControllerDelegate {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let addNoteAction = UIAlertAction(title: "Create New Note", style: .default, handler: nil)
+        let addNoteAction = UIAlertAction(title: "Create New Note", style: .default) {
+            (action) in
+            self.addNote()
+        }
+        
         actionSheet.addAction(addNoteAction)
         
         let addDairyAction = UIAlertAction(title: "Create New Dairy", style: .default, handler: nil)
@@ -61,5 +65,14 @@ extension TabBarController: UITabBarControllerDelegate {
         
         present(actionSheet, animated: true, completion: nil)
     }
+    
+    func addNote() {
+        let noteEditVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Edit Note") as! NoteEditViewController
+        let navigationController = UINavigationController(rootViewController: noteEditVC)
+        noteEditVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: noteEditVC, action: #selector(noteEditVC.back))
+        noteEditVC.noteData = nil
+        present(navigationController, animated: true, completion: nil)
+    }
+    
 }
 

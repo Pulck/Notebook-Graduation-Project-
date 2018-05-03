@@ -7,19 +7,30 @@
 //
 
 import UIKit
+import CoreData
 
 class NoteEditViewController: UIViewController {
+    static let maxTitleLen = 20
+    static let maxPreviewTextLen = 60
+    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var accessoryView: CustomInputAccessoryView!
+    @IBOutlet weak var titleField: UITextField!
+    @IBOutlet weak var notebookButton: UIButton!
     
-    var imageStore = ImageStore()
+    var imageStore = ImageStore.shared
     var imageKeyMap = [NSTextAttachment : String]()
     var imageKeys = [String]()
     var context = AppDelegate.viewContext
     
+    var noteData: Note!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        noteDataInit()
+        
         textView.delegate = self
         textView.isEditable = false
         if !textView.text.isEmpty {
@@ -36,6 +47,24 @@ class NoteEditViewController: UIViewController {
         
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(observeKeyboardInfo(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+    }
+    
+    func noteDataInit() {
+        if noteData == nil {
+            create()
+        } else {
+            titleField.text = noteData.title
+            if let content = noteData.content {
+                let attributedText = try! NSAttributedString(data: content, options: [NSAttributedString.DocumentReadingOptionKey.documentType : NSAttributedString.DocumentType.rtfd], documentAttributes: nil)
+                textView.attributedText = attributedText
+                
+                if let needKeys = noteData.imageKeys {
+                    imageKeys = needKeys as! [String]
+                    createMap(attributedString: attributedText)
+                }
+            }
+        }
     }
     
     @objc func panGestureAction(_ sender: UIPanGestureRecognizer) {
@@ -48,15 +77,77 @@ class NoteEditViewController: UIViewController {
             break
         }
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    deinit {
+        save()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //let _ = try? context.save()
+    func createMap(attributedString: NSAttributedString) {
+        let range = NSRange(location: 0, length: attributedString.length)
+        var index = 0
+        imageKeyMap = [:]
+        
+        attributedString.enumerateAttribute(.attachment, in: range, options: []) { (result, range, stop) in
+            if let attachment = result as? NSTextAttachment {
+                imageKeyMap[attachment] = imageKeys[index]
+                index += 1
+            }
+        }
     }
+    
+    func save() {
+        guard let text = titleField.text, let content = textView.attributedText else {
+            return
+        }
+        
+        var title: String
+        let textContent = text.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+        
+        if textContent.isEmpty {
+            if content.length == 0 {
+                return
+            } else {
+                title = String(textView.text.prefix(NoteEditViewController.maxTitleLen))
+            }
+        } else {
+            title = textContent
+        }
+        
+        do {
+            noteData.title = title
+            noteData.modifyDate = Date()
+            noteData.preview = String(textView.text.prefix(NoteEditViewController.maxPreviewTextLen))
+            noteData.imageKeys = imageKeys as NSObject
+            
+            let range = NSRange(location: 0, length: content.length)
+            let data = try content.data(from: range, documentAttributes: [NSAttributedString.DocumentAttributeKey.documentType : NSAttributedString.DocumentType.rtfd])
+            noteData.content = data
+            
+            try context.save()
+        } catch {
+            fatalError("save failure: \(error)")
+        }
+        
+    }
+    
+    func create() {
+        noteData = Note(context: context)
+        noteData.createdDate = Date()
+        noteData.id = UUID().uuidString
+        let navc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Select Notebook") as! UINavigationController
+        let selectView = navc.topViewController! as! SelectNotebookViewController
+        selectView.cancelButton = nil
+        selectView.noteData = noteData
+        present(navc, animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let notebookName = noteData.notebook?.name {
+            notebookButton.setTitle(notebookName, for: .normal)
+        }
+    }
+    
     
     @IBOutlet weak var editableTipsImageView: UIImageView!
     let isShowKeyboardGesture: (_ gesture: UIGestureRecognizer) -> Bool = { $0 is UITapGestureRecognizer &&
@@ -99,12 +190,18 @@ class NoteEditViewController: UIViewController {
     }
         
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let popoverPresentationController = segue.destination.popoverPresentationController {
+        if segue.identifier == "Select Notebook" {
+            let nvc = segue.destination as! UINavigationController
+            let selectView = nvc.topViewController as! SelectNotebookViewController
+            selectView.noteData = noteData
+            
+        } else if let popoverPresentationController = segue.destination.popoverPresentationController {
             popoverPresentationController.delegate = self
             popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 150, height: 170)
             popoverPresentationController.sourceRect = CGRect(x: 10, y: 10, width: 10, height: 10)
             
         }
+        
     }
     
     @IBAction func test(_ sender: UIButton) {
@@ -148,20 +245,13 @@ class NoteEditViewController: UIViewController {
         }
     }
     
-    func createMap(attributedString: NSAttributedString) {
-        let range = NSRange(location: 0, length: attributedString.length)
-        var index = 0
-        imageKeyMap = [:]
-        
-        attributedString.enumerateAttribute(.attachment, in: range, options: []) { (result, range, stop) in
-            if let attachment = result as? NSTextAttachment {
-                imageKeyMap[attachment] = imageKeys[index]
-                index += 1
-            }
-        }
+    @objc func back() {
+        dismiss(animated: true, completion: nil)
     }
+    
 }
 
+//MARK: - Text View Delegate
 extension NoteEditViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         guard let text = textView.text else {
@@ -181,6 +271,7 @@ extension NoteEditViewController: UITextViewDelegate {
     
 }
 
+//MARK: - ...
 extension NoteEditViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(
         for controller: UIPresentationController,
@@ -195,6 +286,7 @@ extension NoteEditViewController: UIPopoverPresentationControllerDelegate {
     }
 }
 
+//MARK: - Font Setting View Delegate
 extension NoteEditViewController: FontSettingDelegate {
     func fontSizeButtonClick(size: Int) {
         guard let _ = FontSize(rawValue: size) else {
@@ -267,6 +359,7 @@ extension NoteEditViewController: FontSettingDelegate {
     }
 }
 
+//MARK: - Image Picker Extension
 extension NoteEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -293,7 +386,6 @@ extension NoteEditViewController: UIImagePickerControllerDelegate, UINavigationC
         //insert image
         textView.textStorage.insert(NSAttributedString(attachment: attachement), at: textView.selectedRange.location)
         
-        createMap(attributedString: textView.attributedText)
         dismiss(animated: true, completion: nil)
     }
 }

@@ -11,6 +11,13 @@ import UIKit
 ///笔记内容预览Cell
 class NotePreviewCell: UITableViewCell {
 
+    var note: Note! {
+        didSet {
+            updateCell()
+        }
+    }
+    let imageStore = ImageStore.shared
+    
     ///笔记标题
     @IBOutlet weak var noteTitleLabel: UILabel!
     ///笔记文本内容
@@ -138,6 +145,57 @@ class NotePreviewCell: UITableViewCell {
             break
         }
     }
+    
+    func updateCell() {
+        clearData()
+        
+        guard let data = note else {
+            return
+        }
+        
+        if let date = data.createdDate {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale.current
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            noteDateLabel.text = dateFormatter.string(from: date)
+        } else {
+            noteDateLabel.text = nil
+        }
+        
+        noteTitleLabel.text = data.title
+        noteTextLabel.text = data.preview
+        
+        let imageKeysData = data.imageKeys
+        if let imageKeys = imageKeysData as? [String], imageKeys.count != 0 {
+            noteImages = [#imageLiteral(resourceName: "ImagePlaceHolder")]
+            
+            let queue = DispatchQueue.global(qos: .userInitiated)
+            queue.async {
+                [weak self] in
+                var images = [UIImage]()
+                var count = 0
+                for key in imageKeys {
+                    if let image = self?.imageStore.image(forKey: key) {
+                        let data = UIImageJPEGRepresentation(image, 0.5)!
+                        images.append(UIImage(data: data)!)
+                        count += 1
+                    }
+                    
+                    if count == 3 {
+                        break
+                    }
+                }
+                DispatchQueue.main.async {
+                    if data.id == self?.note.id {
+                        self?.noteImages = images
+                    }
+                    
+                }
+            }
+        } else {
+            noteImages = []
+        }
+    }
 }
 
 ///将具有值语义的枚举类型包装到类中，使所有cell的该属性具有引用语义，实现同步修改所有cell的显示模式
@@ -151,4 +209,3 @@ enum ImageAppearMode {
     case large
     case small
 }
-

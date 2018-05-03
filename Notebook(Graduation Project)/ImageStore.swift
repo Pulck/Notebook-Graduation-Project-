@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 
 struct ImageStore {
+    
+    static var shared: ImageStore {
+        return ImageStore()
+    }
+    
     private(set) var cache = NSCache<NSString, UIImage>()
     
     mutating func setImage(_ image: UIImage, forKey key: String) {

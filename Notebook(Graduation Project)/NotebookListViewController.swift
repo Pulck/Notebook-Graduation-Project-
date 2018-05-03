@@ -14,23 +14,32 @@ class NotebookListViewController: UITableViewController {
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var notebookHeaderView: UIView!
     
-    var fetchedResultController: NSFetchedResultsController = {
+    lazy var fetchedResultController: NSFetchedResultsController<Notebook> = {
         let context = AppDelegate.viewContext
-        let fetchRequest = Notebook.fetchRequest()
-        
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest(use: nil), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         do {
+            controller.delegate = self
             try controller.performFetch()
         } catch {
             fatalError("Failed to fetch entities: \(error)")
         }
+        return controller
     }()
     
-    var data = [[1], [20]]
-    var lastIndexPath: IndexPath {
-        return IndexPath(row: data[1][0] - 1, section: 1)
+    func fetchRequest(use predicate: NSPredicate?) -> NSFetchRequest<Notebook> {
+        let fetchRequest: NSFetchRequest<Notebook> = Notebook.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true,  selector: #selector(NSString.localizedCompare(_:)))]
+        fetchRequest.predicate = predicate
+        return fetchRequest
     }
+    
+    
+    var lastIndexPath: IndexPath {
+        let numberOfRow = fetchedResultController.sections?.first?.numberOfObjects ?? 1
+        return IndexPath(row: numberOfRow, section: 1)
+    }
+    
+    var allNoteIndexPath = IndexPath(row: 0, section: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,20 +48,18 @@ class NotebookListViewController: UITableViewController {
         searchBar.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return (fetchedResultController.sections?.count ?? 0) + 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return data[section][0]
+        if section == 0 {
+            return 1
+        } else {
+            return (fetchedResultController.sections?.first?.numberOfObjects ?? 0) + 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -62,23 +69,34 @@ class NotebookListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Notebook Cell", for: indexPath)
         
+        let request: NSFetchRequest<Note> = Note.fetchRequest()
         if let noteCell = cell as? NotebookCell {
             if indexPath.section == 0 {
                 noteCell.notebookImageView?.image = #imageLiteral(resourceName: "Note")
                 noteCell.noteTitle.text = "All Notes"
                 noteCell.separatorLine.isHidden = true
+                
+                request.predicate = NSPredicate(format: "isInTrash = NO")
+                let count = (try? AppDelegate.viewContext.count(for: request)) ?? 0
+                noteCell.noteCount.text = "(\(count))"
             } else if indexPath.section == 1 {
                 if indexPath == lastIndexPath {
                     noteCell.notebookImageView?.image = #imageLiteral(resourceName: "Trash")
                     noteCell.noteTitle.text = "Trash"
                     noteCell.separatorLine.isHidden = true
+                    
+                    request.predicate = NSPredicate(format: "isInTrash = YES")
+                    let count = (try? AppDelegate.viewContext.count(for: request)) ?? 0
+                    noteCell.noteCount.text = "(\(count))"
                 } else {
+                    let indexPath = IndexPath(row: indexPath.row, section: indexPath.section - 1)
                     noteCell.notebookImageView?.image = #imageLiteral(resourceName: "Notebook")
-                    noteCell.noteTitle.text = "Notebook"
+                    let notebookData = fetchedResultController.object(at: indexPath)
+                    noteCell.noteTitle.text = notebookData.name
                     noteCell.separatorLine.isHidden = false
+                    noteCell.noteCount.text = "(\(notebookData.count))"
                 }
             }
-            noteCell.noteCount.text = "(\(indexPath.row))"
             return noteCell
         }
 
@@ -114,46 +132,16 @@ class NotebookListViewController: UITableViewController {
             return true
         }
     }
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
     
     //左滑按钮
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: "Test") { (action, view, vertify) in
-//            if condition {
-//                vertify(true)
-//            } else {
-//                vertify(false)
-//            }
-            if let vc = UIStoryboard(name: "NotebookSettings", bundle: nil).instantiateInitialViewController() {
-                self.present(vc, animated: true, completion: nil)
+        let action = UIContextualAction(style: .normal, title: "Test") { [weak self] (action, view, vertify) in
+            if let nvc = UIStoryboard(name: "NotebookSettings", bundle: nil).instantiateInitialViewController() as? UINavigationController, let vc = nvc.topViewController as? NotebookSettingsController  {
+                let indexPath = IndexPath(row: indexPath.row, section: indexPath.section - 1)
+                vc.notebook = self?.fetchedResultController.object(at: indexPath)
+                self?.present(nvc, animated: true, completion: nil)
             }
-            self.setEditing(false, animated: true)
+            self?.setEditing(false, animated: true)
         }
 
         let configuration = UISwipeActionsConfiguration(actions: [action])
@@ -165,21 +153,24 @@ class NotebookListViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Select Notebook", let notesVC = segue.destination as? NoteListViewController {
-            var title: String?
+            let indexPath = IndexPath(row: selectedIndexpath.row, section: selectedIndexpath.section - 1)
+
+            var title: String
             var listType: ListType?
+            
             if selectedIndexpath.section == 0 {
                 title = "All Notes"
-                listType = .note
-            } else if selectedIndexpath.row == data[1][0] - 1 {
+                listType = .allNote
+            } else if selectedIndexpath.row == lastIndexPath.row {
                 title = "Trash"
                 listType = .trash
             } else {
-                title = "Notebook"
-                listType = .notebook
+                title = fetchedResultController.object(at: indexPath).name!
+                listType = .note
             }
             
-            notesVC.title = title
             notesVC.listType = listType
+            notesVC.notebookName = title
         }
     }
     
@@ -188,13 +179,77 @@ class NotebookListViewController: UITableViewController {
     }
 }
 
+//MARK: - Search Bar Delegate
 extension NotebookListViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        var predicate: NSPredicate?
+        let text = searchText.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+        if text.isEmpty {
+            predicate = nil
+        } else {
+            predicate = NSPredicate(format: "name contains[c] %@", text)
+        }
+        
+        fetchedResultController.setValue(fetchRequest(use: predicate), forKey: "fetchRequest")
+        do {
+            try fetchedResultController.performFetch()
+            tableView.reloadData()
+        } catch {
+            fatalError("Failed to fetch entities: \(error)")
+        }
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
+        fetchedResultController.setValue(fetchRequest(use: nil), forKey: "fetchRequest")
+        do {
+            try fetchedResultController.performFetch()
+            tableView.reloadData()
+        } catch {
+            fatalError("Failed to fetch entities: \(error)")
+        }
     }
+}
+
+//MARK: - Fetched Results Controller Delegate
+extension NotebookListViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch(type) {
+        case .insert:
+            if newIndexPath != nil {
+                let newIndexPath = IndexPath(row: newIndexPath!.row, section: newIndexPath!.section + 1)
+                tableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+        case .delete:
+            if indexPath != nil {
+                let indexPath = IndexPath(row: indexPath!.row, section: indexPath!.section + 1)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if indexPath != nil {
+                let indexPath = IndexPath(row: newIndexPath!.row, section: newIndexPath!.section + 1)
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        default:
+            break;
+        }
+        tableView.reloadRows(at: [allNoteIndexPath], with: .fade)
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+        tableView.reloadRows(at: [lastIndexPath], with: .fade)
+    }
+    
 }

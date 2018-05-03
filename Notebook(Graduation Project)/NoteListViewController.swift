@@ -17,8 +17,37 @@ class NoteListViewController: UITableViewController {
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var buttonArea: UIStackView!
     
-    let context = AppDelegate.viewContext
     let appearModeIndicator = ImageAppearModeIndicator()
+    
+    let context = AppDelegate.viewContext
+    var notebookName: String! {
+        didSet {
+            title = notebookName
+            let request: NSFetchRequest<Note> = Note.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "modifyDate", ascending: false)]
+            var predicate: NSPredicate?
+            switch listType! {
+            case .allNote:
+                predicate =  NSPredicate(format: "isInTrash = NO")
+            case .note:
+                predicate = NSPredicate(format: "notebook.name = %@ && isInTrash = NO", notebookName)
+            case .trash:
+                predicate = NSPredicate(format: "isInTrash = YES")
+            default:
+                break
+            }
+            request.predicate = predicate
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController.delegate = self
+            do {
+                try fetchedResultsController.performFetch()
+            } catch {
+                fatalError("fetched Errol: \(error)")
+            }
+        }
+    }
+    
+    private var fetchedResultsController: NSFetchedResultsController<Note>!
     
     private lazy var dummyView: UIView = {
         let view = UIView()
@@ -47,6 +76,8 @@ class NoteListViewController: UITableViewController {
         dummyView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         dummyView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
+    
+   
     
     func startSearch() {
         buttonArea.isHidden = true
@@ -77,13 +108,11 @@ class NoteListViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return (fetchedResultsController.sections?.count) ?? 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 80
+        return (fetchedResultsController.sections?[section].numberOfObjects) ?? 0
     }
 
     
@@ -91,62 +120,76 @@ class NoteListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Plain Text", for: indexPath)
         
         if let plainTextCell = cell as? NotePreviewCell {
-            
-            plainTextCell.noteDateLabel.text = "1995/7/11"
-            plainTextCell.noteTitleLabel.text = "标题"
-            plainTextCell.noteTextLabel.text = "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
-            plainTextCell.noteImages = [#imageLiteral(resourceName: "TestImage1"), #imageLiteral(resourceName: "TestImage2"), #imageLiteral(resourceName: "TestImage3")]
+            let note = fetchedResultsController.object(at: indexPath)
+            plainTextCell.note = note
             plainTextCell.appearModeIndicator = appearModeIndicator
-
         }
         return cell
     }
- 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    var selectedIndexPath: IndexPath!
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
     }
-    */
+    
+    //左滑按钮
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let noteData = fetchedResultsController.object(at: indexPath)
+        var actions = [UIContextualAction]()
+        
+        let action = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+            if self?.listType == .note {
+                noteData.notebook!.count -= 1
+                noteData.isInTrash = true
+                completionHandler(true)
+            } else {
+                let alter = UIAlertController(title: "Note", message: "Delete?", preferredStyle: .alert)
+                let sureAction = UIAlertAction(title: "Sure", style: .destructive) { [weak self] (action) in
+                    noteData.notebook!.count -= 1
+                    self?.context.delete(noteData)
+                    completionHandler(true)
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+                }
+                alter.addAction(sureAction)
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+                    (action) in
+                    completionHandler(false)
+                }
+                alter.addAction(cancelAction)
+                
+                self?.present(alter, animated: true, completion: nil)
+            }
+        }
+        actions.append(action)
+        
+        if listType == .trash {
+            let restoreAction = UIContextualAction(style: .normal, title: "Restore") { (action, view, completionHandler) in
+                noteData.notebook!.count += 1
+                noteData.isInTrash = false
+                completionHandler(true)
+            }
+            actions.append(restoreAction)
+        } else {
+            let addToShortcutAction = UIContextualAction(style: .normal, title: "AddToShortcut") { (action, view, completionHandler) in
+                noteData.isShortcut = true
+                completionHandler(true)
+            }
+            actions.append(addToShortcutAction)
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: actions)
+        return configuration
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "Edit Note", let noteCell = sender as? NotePreviewCell {
+            let noteEditVC = segue.destination as! NoteEditViewController
+            noteEditVC.noteData = noteCell.note
+        }
     }
-    */
-
+ 
     @IBAction func noteButtonClick(_ sender: UIButton) {
         
     }
@@ -180,7 +223,7 @@ class NoteListViewController: UITableViewController {
         }
         
         switch type {
-        case .note:
+        case .note, .allNote:
             presentAppearOptionsWindow()
         case .notebook, .trash:
             presentOptionsSheet()
@@ -214,15 +257,11 @@ class NoteListViewController: UITableViewController {
             alterController.addAction(notebookOptionsAction)
         }
         
-        let addShortcutAction = UIAlertAction(title: "Add To Shortcut", style: .default, handler: nil)
-        alterController.addAction(addShortcutAction)
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alterController.addAction(cancelAction)
         
         present(alterController, animated: true, completion: nil)
     }
-    
     
     deinit {
         print("total note has deinited")
@@ -240,12 +279,45 @@ extension NoteListViewController: UISearchBarDelegate {
     }
 }
 
-extension NoteListViewController: NoteBookHeaderDelegate {
-    
-}
-
 enum ListType {
     case note
+    case allNote
     case notebook
     case trash
+}
+
+//MARK: - Fetched Results Controller Delegate
+extension NoteListViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch(type) {
+        case .insert:
+            if newIndexPath != nil {
+                tableView.insertRows(at: [newIndexPath!], with: .fade)
+            }
+        case .delete:
+            if indexPath != nil {
+                tableView.deleteRows(at: [indexPath!], with: .fade)
+            }
+        case .update:
+            if indexPath != nil {
+                tableView.reloadRows(at: [indexPath!], with: .fade)
+            }
+        case .move:
+            if indexPath != nil && newIndexPath != nil {
+                tableView.deleteRows(at: [indexPath!], with: .fade)
+                tableView.insertRows(at: [newIndexPath!], with: .fade)
+            }
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
 }
