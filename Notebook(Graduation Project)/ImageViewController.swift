@@ -29,9 +29,7 @@ class ImageViewController: UIViewController {
             scrollView.minimumZoomScale = 0.3
             scrollView.maximumZoomScale = 2
         }
-    }
-    
-
+    }    
 }
 
 extension ImageViewController: UIScrollViewDelegate {

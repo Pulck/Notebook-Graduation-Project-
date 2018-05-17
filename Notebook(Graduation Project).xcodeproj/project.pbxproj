@@ -10,6 +10,7 @@
 		8406D7A02085EBB40027C20A /* FontSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D79F2085EBB40027C20A /* FontSettingView.swift */; };
 		8427D4BA2091B35E00D09904 /* SelectNotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D4B92091B35E00D09904 /* SelectNotebookViewController.swift */; };
 		8433763A208DD95B00F1E445 /* CreateNotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84337639208DD95B00F1E445 /* CreateNotebookViewController.swift */; };
+		84477F7C20AD7C9E00D4ECED /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84477F7B20AD7C9E00D4ECED /* NoteCell.swift */; };
 		84628507203FA6A100DF787B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84628506203FA6A100DF787B /* AppDelegate.swift */; };
 		8462850C203FA6A100DF787B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8462850A203FA6A100DF787B /* Main.storyboard */; };
 		8462850F203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8462850D203FA6A100DF787B /* Notebook_Graduation_Project_.xcdatamodeld */; };
@@ -40,6 +41,7 @@
 		8406D79F2085EBB40027C20A /* FontSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSettingView.swift; sourceTree = "<group>"; };
 		8427D4B92091B35E00D09904 /* SelectNotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNotebookViewController.swift; sourceTree = "<group>"; };
 		84337639208DD95B00F1E445 /* CreateNotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotebookViewController.swift; sourceTree = "<group>"; };
+		84477F7B20AD7C9E00D4ECED /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		84628503203FA6A100DF787B /* Notebook(Graduation Project).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notebook(Graduation Project).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84628506203FA6A100DF787B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8462850B203FA6A100DF787B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				84E15CBF2053FFA900C4246D /* ShortcutViewController.swift */,
+				84477F7B20AD7C9E00D4ECED /* NoteCell.swift */,
 			);
 			name = Shortcut;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84477F7C20AD7C9E00D4ECED /* NoteCell.swift in Sources */,
 				8406D7A02085EBB40027C20A /* FontSettingView.swift in Sources */,
 				849E7888204E233700F219A5 /* NotebookCell.swift in Sources */,
 				84E15CBC2053CA3800C4246D /* NotebookGroupSetting.swift in Sources */,

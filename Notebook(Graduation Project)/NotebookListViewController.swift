@@ -135,7 +135,7 @@ class NotebookListViewController: UITableViewController {
     
     //左滑按钮
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: "Test") { [weak self] (action, view, vertify) in
+        let action = UIContextualAction(style: .normal, title: "Setting") { [weak self] (action, view, vertify) in
             if let nvc = UIStoryboard(name: "NotebookSettings", bundle: nil).instantiateInitialViewController() as? UINavigationController, let vc = nvc.topViewController as? NotebookSettingsController  {
                 let indexPath = IndexPath(row: indexPath.row, section: indexPath.section - 1)
                 vc.notebook = self?.fetchedResultController.object(at: indexPath)

@@ -73,14 +73,20 @@ class AppearOptionsPaneViewController: UITableViewController {
     }
 
     // MARK: - Table view delegate
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let cell = previewOptions[indexPath.row]
-            if cell.accessoryType == .none {
-                cell.accessoryType = .checkmark
-            } else {
-                cell.accessoryType = .none
+            let isCheckMark = cell.accessoryType == .checkmark
+            cell.accessoryType = isCheckMark ? .none : .checkmark
+            switch indexPath.row {
+            case 0:
+                totalNote.appearModeIndicator.isShowImage = !isCheckMark
+                totalNote.tableView.reloadData()
+            case 1:
+                totalNote.appearModeIndicator.isShowContentPreview = !isCheckMark
+                totalNote.tableView.reloadData()
+            default:
+                break
             }
         } else if indexPath.section == 2 {
             for (index, cell) in sortOptions.enumerated() {
@@ -88,9 +94,20 @@ class AppearOptionsPaneViewController: UITableViewController {
                     cell.accessoryType = .none
                 } else {
                     cell.accessoryType = .checkmark
+                    switch index {
+                    case 0:
+                        totalNote.sortDescriptions = [NSSortDescriptor(key: "modifyDate", ascending: false)]
+                    case 1:
+                        totalNote.sortDescriptions = [NSSortDescriptor(key: "createdDate", ascending: false), NSSortDescriptor(key: "modifyDate", ascending: false)]
+                    case 2:
+                        totalNote.sortDescriptions = [NSSortDescriptor(key: "title", ascending: false, selector: #selector(NSString.localizedCompare(_:))), NSSortDescriptor(key: "modifyDate", ascending: false)]
+                    default:
+                        fatalError("invaild sortDescription")
+                    }
                 }
             }
         }
+        
     }
 
     deinit {

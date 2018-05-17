@@ -13,24 +13,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -48,22 +31,7 @@ extension TabBarController: UITabBarControllerDelegate {
             return
         }
         
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let addNoteAction = UIAlertAction(title: "Create New Note", style: .default) {
-            (action) in
-            self.addNote()
-        }
-        
-        actionSheet.addAction(addNoteAction)
-        
-        let addDairyAction = UIAlertAction(title: "Create New Dairy", style: .default, handler: nil)
-        actionSheet.addAction(addDairyAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        actionSheet.addAction(cancelAction)
-        
-        present(actionSheet, animated: true, completion: nil)
+        self.addNote()
     }
     
     func addNote() {

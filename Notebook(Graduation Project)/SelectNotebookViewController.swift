@@ -29,15 +29,16 @@ class SelectNotebookViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if !shouleHideCancelButton {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
+        }
+    }
+    
+    @objc func cancelAction() {
+        dismiss(animated: true, completion: nil)
     }
 
-    @IBOutlet var cancelButton: [UIBarButtonItem]!
+    var shouleHideCancelButton = false
 
     // MARK: - Table view data source
 

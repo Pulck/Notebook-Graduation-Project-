@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Diary" representedClassName="Diary" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="contents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DiaryContent" inverseName="diary" inverseEntity="DiaryContent" syncable="YES"/>
-    </entity>
-    <entity name="DiaryContent" representedClassName="DiaryContent" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="weather" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="diary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Diary" inverseName="contents" inverseEntity="Diary" syncable="YES"/>
-    </entity>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Diary" representedClassName="Diary" syncable="YES" codeGenerationType="class"/>
+    <entity name="DiaryContent" representedClassName="DiaryContent" syncable="YES" codeGenerationType="class"/>
     <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -22,7 +11,7 @@
         <attribute name="isShortcut" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modifyDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="preview" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" maxValueString="20" storedInTruthFile="YES" syncable="YES"/>
         <relationship name="notebook" maxCount="1" deletionRule="Nullify" destinationEntity="Notebook" inverseName="notes" inverseEntity="Notebook" syncable="YES"/>
     </entity>
     <entity name="Notebook" representedClassName="Notebook" syncable="YES" codeGenerationType="class">
@@ -33,9 +22,9 @@
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Note" inverseName="notebook" inverseEntity="Note" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Diary" positionX="-108" positionY="297" width="128" height="90"/>
-        <element name="DiaryContent" positionX="88" positionY="270" width="128" height="135"/>
-        <element name="Note" positionX="90" positionY="27" width="128" height="195"/>
-        <element name="Notebook" positionX="-108" positionY="32" width="128" height="28"/>
+        <element name="Diary" positionX="-108" positionY="297" width="128" height="43"/>
+        <element name="DiaryContent" positionX="88" positionY="270" width="128" height="43"/>
+        <element name="Note" positionX="90" positionY="27" width="128" height="193"/>
+        <element name="Notebook" positionX="-126" positionY="36" width="117" height="118"/>
     </elements>
 </model>

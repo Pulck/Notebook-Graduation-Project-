@@ -33,6 +33,7 @@ class NoteEditViewController: UIViewController {
         
         textView.delegate = self
         textView.isEditable = false
+        
         if !textView.text.isEmpty {
             tipsLabel.isHidden = true
         }
@@ -80,6 +81,9 @@ class NoteEditViewController: UIViewController {
     
     deinit {
         save()
+        
+        let center = NotificationCenter.default
+        center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
     func createMap(attributedString: NSAttributedString) {
@@ -104,11 +108,7 @@ class NoteEditViewController: UIViewController {
         let textContent = text.trimmingCharacters(in: CharacterSet(charactersIn: " "))
         
         if textContent.isEmpty {
-            if content.length == 0 {
-                return
-            } else {
-                title = String(textView.text.prefix(NoteEditViewController.maxTitleLen))
-            }
+            title = String(textView.text.prefix(NoteEditViewController.maxTitleLen))
         } else {
             title = textContent
         }
@@ -136,7 +136,7 @@ class NoteEditViewController: UIViewController {
         noteData.id = UUID().uuidString
         let navc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Select Notebook") as! UINavigationController
         let selectView = navc.topViewController! as! SelectNotebookViewController
-        selectView.cancelButton = nil
+        selectView.shouleHideCancelButton = true
         selectView.noteData = noteData
         present(navc, animated: true, completion: nil)
     }
@@ -194,20 +194,6 @@ class NoteEditViewController: UIViewController {
             let nvc = segue.destination as! UINavigationController
             let selectView = nvc.topViewController as! SelectNotebookViewController
             selectView.noteData = noteData
-            
-        } else if let popoverPresentationController = segue.destination.popoverPresentationController {
-            popoverPresentationController.delegate = self
-            popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 150, height: 170)
-            popoverPresentationController.sourceRect = CGRect(x: 10, y: 10, width: 10, height: 10)
-            
-        }
-        
-    }
-    
-    @IBAction func test(_ sender: UIButton) {
-        if let attribue = textView.typingAttributes[NSAttributedStringKey.font.rawValue],  let font = attribue as? UIFont{
-            print("descriptor: \(font.fontDescriptor) selectedRange: \(textView.selectedRange)")
-            textView.typingAttributes[NSAttributedStringKey.foregroundColor.rawValue] = UIColor.red
         }
     }
     
@@ -230,16 +216,47 @@ class NoteEditViewController: UIViewController {
         }
     }
     
-    @IBAction func hideKeyboard(_ sender: UIButton) {
+    @IBAction func insertAttachemntAction(_ sender: UIButton) {
         textView.inputView = nil
         textView.resignFirstResponder()
-        showCamera(UIBarButtonItem())
+        
+        let actionSheet = UIAlertController(title: "Select", message: "Select input", preferredStyle: .actionSheet)
+        
+        let selectCameraAction = UIAlertAction(title: "Camera", style: .default) {
+            [weak self] (action) in
+            self?.showCamera()
+        }
+        actionSheet.addAction(selectCameraAction)
+
+        let selectPhotoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) {
+            [weak self] (action) in
+            self?.showPhotoLibrary()
+        }
+        actionSheet.addAction(selectPhotoLibraryAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true, completion: nil)
     }
     
-    @IBAction func showCamera(_ sender: UIBarButtonItem) {
+    @IBAction func cameraButton(_ sender: UIBarButtonItem) {
+        showCamera()
+    }
+    
+    func showCamera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = .camera
+            imagePicker.delegate = self
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func showPhotoLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = .photoLibrary
             imagePicker.delegate = self
             present(imagePicker, animated: true, completion: nil)
         }
@@ -269,21 +286,22 @@ extension NoteEditViewController: UITextViewDelegate {
         return true
     }
     
-}
-
-//MARK: - ...
-extension NoteEditViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyle(
-        for controller: UIPresentationController,
-        traitCollection: UITraitCollection
-        ) -> UIModalPresentationStyle {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
-        if traitCollection.verticalSizeClass == .regular {
-            return .none
-        } else  {
-            return .overFullScreen
+        let attributeText = textView.textStorage.attributedSubstring(from: range)
+        if attributeText.length > 0 {
+            let attributes = attributeText.attributes(at: 0, longestEffectiveRange: nil, in: NSRange(location: 0, length: attributeText.length))
+            if let attachement = attributes[.attachment] as? NSTextAttachment {
+                let key = imageKeyMap[attachement]!
+                imageKeyMap[attachement] = nil
+                let index = imageKeys.index(of: key)!
+                imageKeys.remove(at: index)
+                imageStore.deleteImage(forKey: key)
+            }
         }
+        return true
     }
+    
 }
 
 //MARK: - Font Setting View Delegate
@@ -333,6 +351,10 @@ extension NoteEditViewController: FontSettingDelegate {
         
     }
     
+    func fontColorButtonClick(color: UIColor) {
+        textView.typingAttributes[NSAttributedStringKey.foregroundColor.rawValue] = color
+    }
+    
     func modifiedFontAttribute(in attribute:[String : Any], style: String? = nil, size: Int? = nil) -> [String : Any]? {
         var attribute = attribute
         if let currentFontAttribute = attribute[NSAttributedStringKey.font.rawValue], let currentFont = currentFontAttribute as? UIFont {
@@ -371,8 +393,7 @@ extension NoteEditViewController: UIImagePickerControllerDelegate, UINavigationC
         UIGraphicsBeginImageContext(size);
         image.draw(in: CGRect(origin: CGPoint.zero, size: size))
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext();
-        
+        UIGraphicsEndImageContext()
         
         //attachement
         let attachement = NSTextAttachment()
@@ -385,6 +406,7 @@ extension NoteEditViewController: UIImagePickerControllerDelegate, UINavigationC
 
         //insert image
         textView.textStorage.insert(NSAttributedString(attachment: attachement), at: textView.selectedRange.location)
+        tipsLabel.isHidden = true
         
         dismiss(animated: true, completion: nil)
     }

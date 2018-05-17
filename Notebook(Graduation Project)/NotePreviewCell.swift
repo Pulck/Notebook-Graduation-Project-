@@ -119,6 +119,14 @@ class NotePreviewCell: UITableViewCell {
             return
         }
         
+        if !appearModeIndicator.isShowImage {
+            imageArea.isHidden = true
+            horizonImageView.isHidden = true
+            return
+        } else {
+            imageArea.isHidden = false
+        }
+        
         switch appearModeIndicator.appearMode {
         case .large:
             horizonImageView.isHidden = true
@@ -164,6 +172,11 @@ class NotePreviewCell: UITableViewCell {
         
         noteTitleLabel.text = data.title
         noteTextLabel.text = data.preview
+        if appearModeIndicator?.isShowContentPreview ?? true {
+            noteTextLabel.isHidden = false
+        } else {
+            noteTextLabel.isHidden = true
+        }
         
         let imageKeysData = data.imageKeys
         if let imageKeys = imageKeysData as? [String], imageKeys.count != 0 {
@@ -196,11 +209,14 @@ class NotePreviewCell: UITableViewCell {
             noteImages = []
         }
     }
+   
 }
 
 ///将具有值语义的枚举类型包装到类中，使所有cell的该属性具有引用语义，实现同步修改所有cell的显示模式
 class ImageAppearModeIndicator {
     var appearMode = ImageAppearMode.normal
+    var isShowImage = true
+    var isShowContentPreview = true
 }
 
 ///图片视图的显示方式及大小，同样影响可显示的文字行数

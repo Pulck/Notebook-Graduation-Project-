@@ -23,9 +23,7 @@ class NoteListViewController: UITableViewController {
     var notebookName: String! {
         didSet {
             title = notebookName
-            let request: NSFetchRequest<Note> = Note.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "modifyDate", ascending: false)]
-            var predicate: NSPredicate?
+            
             switch listType! {
             case .allNote:
                 predicate =  NSPredicate(format: "isInTrash = NO")
@@ -36,15 +34,37 @@ class NoteListViewController: UITableViewController {
             default:
                 break
             }
-            request.predicate = predicate
+            
+        }
+    }
+    
+    var originPredicate: NSPredicate!
+    var predicate: NSPredicate! {
+        didSet {
+            let request = fetchRequest(use: predicate)
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
             do {
                 try fetchedResultsController.performFetch()
+                tableView.reloadData()
             } catch {
                 fatalError("fetched Errol: \(error)")
             }
         }
+    }
+    
+    var sortDescriptions = [NSSortDescriptor(key: "modifyDate", ascending: false)] {
+        didSet {
+            let currentPredicate = predicate
+            predicate = currentPredicate
+        }
+    }
+    
+    func fetchRequest(use predicate: NSPredicate) -> NSFetchRequest<Note> {
+        let request: NSFetchRequest<Note> = Note.fetchRequest()
+        request.sortDescriptors = sortDescriptions
+        request.predicate = predicate
+        return request
     }
     
     private var fetchedResultsController: NSFetchedResultsController<Note>!
@@ -61,7 +81,7 @@ class NoteListViewController: UITableViewController {
         //动态计算cell的高度
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-
+        
         searchBar.delegate = self
         searchBar.backgroundColor = UIColor.groupTableViewBackground
         
@@ -77,12 +97,12 @@ class NoteListViewController: UITableViewController {
         dummyView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
-   
+    
     
     func startSearch() {
         buttonArea.isHidden = true
         searchBar.setShowsCancelButton(true, animated: true)
-
+        
         dummyView.isHidden = false
         tableView.isScrollEnabled = false
         UIView.animate(withDuration: 0.3) {
@@ -103,18 +123,19 @@ class NoteListViewController: UITableViewController {
                 self.tableView.isScrollEnabled = true
             }
         }
+        
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return (fetchedResultsController.sections?.count) ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (fetchedResultsController.sections?[section].numberOfObjects) ?? 0
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Plain Text", for: indexPath)
@@ -145,10 +166,9 @@ class NoteListViewController: UITableViewController {
             } else {
                 let alter = UIAlertController(title: "Note", message: "Delete?", preferredStyle: .alert)
                 let sureAction = UIAlertAction(title: "Sure", style: .destructive) { [weak self] (action) in
-                    noteData.notebook!.count -= 1
                     self?.context.delete(noteData)
                     completionHandler(true)
-
+                    
                 }
                 alter.addAction(sureAction)
                 
@@ -173,7 +193,7 @@ class NoteListViewController: UITableViewController {
         } else {
             let addToShortcutAction = UIContextualAction(style: .normal, title: "AddToShortcut") { (action, view, completionHandler) in
                 noteData.isShortcut = true
-                completionHandler(true)
+                completionHandler(false)
             }
             actions.append(addToShortcutAction)
         }
@@ -189,7 +209,7 @@ class NoteListViewController: UITableViewController {
             noteEditVC.noteData = noteCell.note
         }
     }
- 
+    
     @IBAction func noteButtonClick(_ sender: UIButton) {
         
     }
@@ -268,14 +288,29 @@ class NoteListViewController: UITableViewController {
     }
 }
 
-
+//MARK: - Search Delegate
 extension NoteListViewController: UISearchBarDelegate {
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         startSearch()
+        if originPredicate == nil {
+            originPredicate = predicate
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let text = searchBar.text?.trimmingCharacters(in: CharacterSet(charactersIn: " ")) ?? ""
+        
+        let appendPredicate = NSPredicate(format: "title contains[c] %@ OR preview contains[c] %@", text, text)
+        predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [originPredicate, appendPredicate])
+        endSearch()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         endSearch()
+        predicate = originPredicate
+        originPredicate = nil
+        searchBar.text = ""
     }
 }
 
