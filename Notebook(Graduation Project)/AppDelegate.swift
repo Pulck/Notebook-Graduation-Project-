@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.isStatusBarHidden = false
         
         let defalut = UserDefaults.standard
-        let options: [String : Any] = [ListOptionsKey.appearMode : NSNumber(value: 1),
+        let options: [String : Any] = [ListOptionsKey.appearMode : NSNumber(value: ListAppearMode.normal.rawValue),
                                        ListOptionsKey.isDisplayImage : NSNumber(value: true),
                                        ListOptionsKey.isDisplayBodyContent : NSNumber(value: true),
-                                       ListOptionsKey.sortOptions : NSNumber(value: 0),
+                                       ListOptionsKey.sortOption : NSNumber(value: ListSortOption.updatedDate.rawValue)
                                        ]
         
         defalut.register(defaults: options)

@@ -16,11 +16,18 @@ class AppearOptionsPaneViewController: UITableViewController {
     
     weak var totalNote: NoteListViewController!
     
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initData()
+    }
+    
+    func initData() {
+        let indicator = totalNote.appearModeIndicator
         var tag = 1
-        switch totalNote.appearModeIndicator.appearMode {
+        switch indicator.appearMode {
         case .small:
             tag = 0
         case .normal:
@@ -29,6 +36,12 @@ class AppearOptionsPaneViewController: UITableViewController {
             tag = 2
         }
         appearModebuttons[tag].backgroundColor = UIColor.green
+        
+        
+        previewOptions[0].accessoryType = indicator.isShowImage ? .checkmark : .none
+        previewOptions[1].accessoryType = indicator.isShowContentPreview ? .checkmark : .none
+        
+        sortOptions[indicator.sortOption].accessoryType = .checkmark
     }
     
     @IBAction func appearModeSelect(_ sender: UIButton) {
@@ -47,7 +60,7 @@ class AppearOptionsPaneViewController: UITableViewController {
     
     ///通过主window经过navigation Controller接触total notes view Controller，用来更改显示模式，耦合太高，需要修改
     func updateImageAppearMode(sender: UIButton) {
-        var mode = ImageAppearMode.normal
+        var mode = ListAppearMode.normal
         switch sender.tag {
         case 0:
             mode = .small
@@ -60,6 +73,7 @@ class AppearOptionsPaneViewController: UITableViewController {
         }
         totalNote.appearModeIndicator.appearMode = mode
         totalNote.tableView.reloadData()
+        defaults.set(mode.rawValue, forKey: ListOptionsKey.appearMode)
     }
     
     // MARK: - Table view data source
@@ -80,11 +94,15 @@ class AppearOptionsPaneViewController: UITableViewController {
             cell.accessoryType = isCheckMark ? .none : .checkmark
             switch indexPath.row {
             case 0:
-                totalNote.appearModeIndicator.isShowImage = !isCheckMark
+                let result = !isCheckMark
+                totalNote.appearModeIndicator.isShowImage = result
                 totalNote.tableView.reloadData()
+                defaults.set(result, forKey: ListOptionsKey.isDisplayImage)
             case 1:
-                totalNote.appearModeIndicator.isShowContentPreview = !isCheckMark
+                let result = !isCheckMark
+                totalNote.appearModeIndicator.isShowContentPreview = result
                 totalNote.tableView.reloadData()
+                defaults.set(result, forKey: ListOptionsKey.isDisplayBodyContent)
             default:
                 break
             }
@@ -94,15 +112,10 @@ class AppearOptionsPaneViewController: UITableViewController {
                     cell.accessoryType = .none
                 } else {
                     cell.accessoryType = .checkmark
-                    switch index {
-                    case 0:
-                        totalNote.sortDescriptions = [NSSortDescriptor(key: "modifyDate", ascending: false)]
-                    case 1:
-                        totalNote.sortDescriptions = [NSSortDescriptor(key: "createdDate", ascending: false), NSSortDescriptor(key: "modifyDate", ascending: false)]
-                    case 2:
-                        totalNote.sortDescriptions = [NSSortDescriptor(key: "title", ascending: false, selector: #selector(NSString.localizedCompare(_:))), NSSortDescriptor(key: "modifyDate", ascending: false)]
-                    default:
-                        fatalError("invaild sortDescription")
+                    if let option = ListSortOption(rawValue: index) {
+                        let sortDescriptions = ListSortDescription.standard[option]
+                        totalNote.sortDescriptions = sortDescriptions
+                        defaults.set(index, forKey: ListOptionsKey.sortOption)
                     }
                 }
             }

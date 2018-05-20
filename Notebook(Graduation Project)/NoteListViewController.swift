@@ -17,7 +17,17 @@ class NoteListViewController: UITableViewController {
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var buttonArea: UIStackView!
     
-    let appearModeIndicator = ImageAppearModeIndicator()
+    let appearModeIndicator: ListAppearModeIndicator = {
+        let defaults = UserDefaults.standard
+        let indicator = ListAppearModeIndicator()
+        
+        indicator.appearMode = ListAppearMode(rawValue: defaults.integer(forKey: ListOptionsKey.appearMode))!
+        indicator.isShowImage = defaults.bool(forKey: ListOptionsKey.isDisplayImage)
+        indicator.isShowContentPreview = defaults.bool(forKey: ListOptionsKey.isDisplayBodyContent)
+        indicator.sortOption = defaults.integer(forKey: ListOptionsKey.sortOption)
+        
+        return indicator
+    }()
     
     let context = AppDelegate.viewContext
     var notebookName: String! {
@@ -53,7 +63,10 @@ class NoteListViewController: UITableViewController {
         }
     }
     
-    var sortDescriptions = [NSSortDescriptor(key: "modifyDate", ascending: false)] {
+    var sortDescriptions: [NSSortDescriptor] = {
+        let option = ListSortOption(rawValue: UserDefaults.standard.integer(forKey: ListOptionsKey.sortOption))!
+        return ListSortDescription.standard[option]
+        }() {
         didSet {
             let currentPredicate = predicate
             predicate = currentPredicate

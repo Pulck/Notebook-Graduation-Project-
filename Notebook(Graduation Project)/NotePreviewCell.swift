@@ -74,7 +74,7 @@ class NotePreviewCell: UITableViewCell {
     }
     
     ///指示当前的显示模式
-    var appearModeIndicator: ImageAppearModeIndicator! {
+    var appearModeIndicator: ListAppearModeIndicator! {
         didSet {
             updateImageAppear()
         }
@@ -213,15 +213,16 @@ class NotePreviewCell: UITableViewCell {
 }
 
 ///将具有值语义的枚举类型包装到类中，使所有cell的该属性具有引用语义，实现同步修改所有cell的显示模式
-class ImageAppearModeIndicator {
-    var appearMode = ImageAppearMode.normal
+class ListAppearModeIndicator {
+    var appearMode = ListAppearMode.normal
     var isShowImage = true
     var isShowContentPreview = true
+    var sortOption = ListSortOption.updatedDate.rawValue
 }
 
 ///图片视图的显示方式及大小，同样影响可显示的文字行数
-enum ImageAppearMode {
+enum ListAppearMode: Int {
+    case small
     case normal
     case large
-    case small
 }
