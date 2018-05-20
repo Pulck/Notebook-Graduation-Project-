@@ -37,7 +37,8 @@ extension TabBarController: UITabBarControllerDelegate {
     func addNote() {
         let noteEditVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Edit Note") as! NoteEditViewController
         let navigationController = UINavigationController(rootViewController: noteEditVC)
-        noteEditVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: noteEditVC, action: #selector(noteEditVC.back))
+        noteEditVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: noteEditVC, action: #selector(noteEditVC.backAndSave))
+        noteEditVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: noteEditVC, action: #selector(noteEditVC.backAndDelete))
         noteEditVC.noteData = nil
         present(navigationController, animated: true, completion: nil)
     }

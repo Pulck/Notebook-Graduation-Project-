@@ -10,7 +10,7 @@ import UIKit
 
 class NoteCell: UITableViewCell {
 
-    @IBOutlet weak var spreatorLine: UIView!
+    @IBOutlet weak var separatorLine: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

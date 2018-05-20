@@ -16,8 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         UIApplication.shared.isStatusBarHidden = false
+        
+        let defalut = UserDefaults.standard
+        let options: [String : Any] = [ListOptionsKey.appearMode : NSNumber(value: 1),
+                                       ListOptionsKey.isDisplayImage : NSNumber(value: true),
+                                       ListOptionsKey.isDisplayBodyContent : NSNumber(value: true),
+                                       ListOptionsKey.sortOptions : NSNumber(value: 0),
+                                       ]
+        
+        defalut.register(defaults: options)
         return true
     }
 

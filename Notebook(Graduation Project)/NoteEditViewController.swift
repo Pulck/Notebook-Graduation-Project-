@@ -262,7 +262,13 @@ class NoteEditViewController: UIViewController {
         }
     }
     
-    @objc func back() {
+    @objc func backAndSave() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func backAndDelete() {
+        noteData.notebook?.count -= 1
+        context.delete(noteData)
         dismiss(animated: true, completion: nil)
     }
     

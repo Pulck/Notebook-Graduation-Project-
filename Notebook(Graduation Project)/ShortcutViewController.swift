@@ -38,6 +38,16 @@ class ShortcutViewController: UITableViewController {
     
     var noteFetchedResultsController: NSFetchedResultsController<Note>!
     var notebookFetchedResultsController: NSFetchedResultsController<Notebook>!
+    
+    func lastRow(for section: Int) -> Int {
+        var row: Int = 0
+        if section == 0 {
+             row = (noteFetchedResultsController.fetchedObjects?.count ?? 1) - 1
+        } else if section == 1 {
+            row = (notebookFetchedResultsController.fetchedObjects?.count ?? 1) - 1
+        }
+        return row
+    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,14 +73,16 @@ class ShortcutViewController: UITableViewController {
             let noteCell = cell as! NoteCell
             
             noteCell.titleLabel.text = noteFetchedResultsController.object(at: indexPath).title
+            noteCell.separatorLine.isHidden = (indexPath.row == lastRow(for: indexPath.section))
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "Notebook Cell", for: indexPath)
             let notebookCell = cell as! NotebookCell
             
-            let indexPath = IndexPath(row: indexPath.row, section: 0)
-            let notebookData = notebookFetchedResultsController.object(at: indexPath)
+            let fixIndexPath = IndexPath(row: indexPath.row, section: 0)
+            let notebookData = notebookFetchedResultsController.object(at: fixIndexPath)
             notebookCell.noteTitle.text = notebookData.name
             notebookCell.noteCount.text = "\(notebookData.count)"
+            notebookCell.separatorLine.isHidden = (indexPath.row == lastRow(for: indexPath.section))
         default:
             preconditionFailure("not found shortcut type")
         }

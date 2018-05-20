@@ -182,12 +182,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="pwB-Ij-VHq">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="pwB-Ij-VHq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIG-li-qf3">
-                                    <rect key="frame" x="2" y="-50" width="368" height="56"/>
+                                    <rect key="frame" x="2" y="-1" width="368" height="56"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" backgroundImage="searchBarBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="NaO-g7-ef6">
                                             <rect key="frame" x="0.0" y="0.0" width="272" height="56"/>
@@ -495,9 +495,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oUn-me-Ks2"/>
                     </view>
-                    <navigationItem key="navigationItem" id="uJB-6v-dEY">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="qLh-ha-2j2"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="uJB-6v-dEY"/>
                     <connections>
                         <outlet property="accessoryView" destination="VTY-Yo-Hdf" id="geN-Lr-mOz"/>
                         <outlet property="editableTipsImageView" destination="utX-eQ-XkU" id="PWU-cU-MWV"/>
@@ -796,7 +794,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="spreatorLine" destination="kEE-ek-gYU" id="vIr-qE-2Cq"/>
+                                    <outlet property="separatorLine" destination="kEE-ek-gYU" id="vIr-qE-2Cq"/>
                                     <outlet property="titleLabel" destination="VpJ-Sg-vBm" id="eAf-Ti-X77"/>
                                     <segue destination="1hO-fU-eiS" kind="show" identifier="Show Content" id="CaK-YI-gTY"/>
                                 </connections>
@@ -885,7 +883,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Az-EY-aOM" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3638" y="497"/>
+            <point key="canvasLocation" x="3638" y="485"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="w3V-B6-1Bc">
@@ -936,7 +934,7 @@
         <image name="tipIcon" width="48" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sHB-Fm-bWh"/>
+        <segue reference="VbM-Vc-v0u"/>
         <segue reference="CaK-YI-gTY"/>
         <segue reference="L2d-Y0-1J6"/>
     </inferredMetricsTieBreakers>
