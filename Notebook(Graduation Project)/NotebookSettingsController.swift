@@ -22,15 +22,16 @@ class NotebookSettingsController: UITableViewController {
     }
     
     @IBAction func deleteAction(_ sender: UIButton) {
-        let alter = UIAlertController(title: "Note", message: "Delete?", preferredStyle: .alert)
-        let sureAction = UIAlertAction(title: "Sure", style: .destructive) { [weak self] (action) in
+        let alter = UIAlertController(title: NSLocalizedString("Note", comment: "注意"), message: NSLocalizedString("Delete?", comment: "是否删除"), preferredStyle: .alert)
+        
+        let sureAction = UIAlertAction(title: NSLocalizedString("Sure", comment: "确定"), style: .destructive) { [weak self] (action) in
             guard let notebook = self?.notebook else { fatalError("Not found notebook entity") }
             AppDelegate.viewContext.delete(notebook)
             self?.dismiss(animated: true, completion: nil)
         }
         alter.addAction(sureAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "取消"), style: .cancel, handler: nil)
         alter.addAction(cancelAction)
 
         present(alter, animated: true, completion: nil)

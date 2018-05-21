@@ -182,12 +182,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="pwB-Ij-VHq">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="pwB-Ij-VHq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIG-li-qf3">
-                                    <rect key="frame" x="2" y="-1" width="368" height="56"/>
+                                    <rect key="frame" x="2" y="-50" width="368" height="56"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" backgroundImage="searchBarBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="NaO-g7-ef6">
                                             <rect key="frame" x="0.0" y="0.0" width="272" height="56"/>
@@ -647,7 +647,7 @@
                     <viewLayoutGuide key="safeArea" id="Vsn-Tv-rGD"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2702" y="486"/>
+            <point key="canvasLocation" x="2537" y="486"/>
         </scene>
         <!--Notebook-->
         <scene sceneID="e82-0G-cgz">

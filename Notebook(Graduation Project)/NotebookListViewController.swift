@@ -73,7 +73,7 @@ class NotebookListViewController: UITableViewController {
         if let noteCell = cell as? NotebookCell {
             if indexPath.section == 0 {
                 noteCell.notebookImageView?.image = #imageLiteral(resourceName: "Note")
-                noteCell.noteTitle.text = "All Notes"
+                noteCell.noteTitle.text = NSLocalizedString("All Notes", comment: "所有笔记")
                 noteCell.separatorLine.isHidden = true
                 
                 request.predicate = NSPredicate(format: "isInTrash = NO")
@@ -82,7 +82,7 @@ class NotebookListViewController: UITableViewController {
             } else if indexPath.section == 1 {
                 if indexPath == lastIndexPath {
                     noteCell.notebookImageView?.image = #imageLiteral(resourceName: "Trash")
-                    noteCell.noteTitle.text = "Trash"
+                    noteCell.noteTitle.text = NSLocalizedString("Trash", comment: "回收站")
                     noteCell.separatorLine.isHidden = true
                     
                     request.predicate = NSPredicate(format: "isInTrash = YES")
@@ -159,10 +159,10 @@ class NotebookListViewController: UITableViewController {
             var listType: ListType?
             
             if selectedIndexpath.section == 0 {
-                title = "All Notes"
+                title = NSLocalizedString("All Notes", comment: "所有笔记")
                 listType = .allNote
             } else if selectedIndexpath.row == lastIndexPath.row {
-                title = "Trash"
+                title = NSLocalizedString("Trash", comment: "回收站")
                 listType = .trash
             } else {
                 title = fetchedResultController.object(at: indexPath).name!

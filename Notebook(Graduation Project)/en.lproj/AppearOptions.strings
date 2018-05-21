@@ -1,0 +1,39 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Note Preview"; ObjectID = "Ahu-0t-ojO"; */
+"Ahu-0t-ojO.headerTitle" = "Note Preview";
+
+/* Class = "UIButton"; normalTitle = "M"; ObjectID = "ErS-qP-fjI"; */
+"ErS-qP-fjI.normalTitle" = "M";
+
+/* Class = "UITableViewSection"; headerTitle = "Sort Options"; ObjectID = "JyE-rD-jjp"; */
+"JyE-rD-jjp.headerTitle" = "Sort Options";
+
+/* Class = "UILabel"; text = "Date created"; ObjectID = "MUo-ei-dFQ"; */
+"MUo-ei-dFQ.text" = "Date created";
+
+/* Class = "UILabel"; text = "Note title"; ObjectID = "Sob-ue-o2x"; */
+"Sob-ue-o2x.text" = "Note title";
+
+/* Class = "UILabel"; text = "Appear Options"; ObjectID = "Sz8-c6-Gq2"; */
+"Sz8-c6-Gq2.text" = "Appear Options";
+
+/* Class = "UILabel"; text = "Display body content"; ObjectID = "gT2-8n-pKN"; */
+"gT2-8n-pKN.text" = "Display body content";
+
+/* Class = "UIButton"; normalTitle = "S"; ObjectID = "joR-wB-WpG"; */
+"joR-wB-WpG.normalTitle" = "S";
+
+/* Class = "UIButton"; normalTitle = "L"; ObjectID = "lo0-az-E8n"; */
+"lo0-az-E8n.normalTitle" = "L";
+
+/* Class = "UIButton"; normalTitle = "×"; ObjectID = "o1G-4b-tg8"; */
+"o1G-4b-tg8.normalTitle" = "×";
+
+/* Class = "UINavigationItem"; title = "Apear Options"; ObjectID = "pEN-IF-5dH"; */
+"pEN-IF-5dH.title" = "Apear Options";
+
+/* Class = "UILabel"; text = "Display image"; ObjectID = "u0b-Gn-csN"; */
+"u0b-Gn-csN.text" = "Display image";
+
+/* Class = "UILabel"; text = "Updated date"; ObjectID = "xh9-yX-3rL"; */
+"xh9-yX-3rL.text" = "Updated date";

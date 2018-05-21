@@ -220,21 +220,21 @@ class NoteEditViewController: UIViewController {
         textView.inputView = nil
         textView.resignFirstResponder()
         
-        let actionSheet = UIAlertController(title: "Select", message: "Select input", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: NSLocalizedString("Select", comment: "选择输入方式"), message: "Select input", preferredStyle: .actionSheet)
         
-        let selectCameraAction = UIAlertAction(title: "Camera", style: .default) {
+        let selectCameraAction = UIAlertAction(title:  NSLocalizedString("Camera", comment: "照相机"), style: .default) {
             [weak self] (action) in
             self?.showCamera()
         }
         actionSheet.addAction(selectCameraAction)
 
-        let selectPhotoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) {
+        let selectPhotoLibraryAction = UIAlertAction(title: NSLocalizedString("Photo Library", comment: "相册"), style: .default) {
             [weak self] (action) in
             self?.showPhotoLibrary()
         }
         actionSheet.addAction(selectPhotoLibraryAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "取消"), style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         
         present(actionSheet, animated: true, completion: nil)

@@ -1,0 +1,39 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Note Preview"; ObjectID = "Ahu-0t-ojO"; */
+"Ahu-0t-ojO.headerTitle" = "笔记预览";
+
+/* Class = "UIButton"; normalTitle = "M"; ObjectID = "ErS-qP-fjI"; */
+"ErS-qP-fjI.normalTitle" = "M";
+
+/* Class = "UITableViewSection"; headerTitle = "Sort Options"; ObjectID = "JyE-rD-jjp"; */
+"JyE-rD-jjp.headerTitle" = "排序方式";
+
+/* Class = "UILabel"; text = "Date created"; ObjectID = "MUo-ei-dFQ"; */
+"MUo-ei-dFQ.text" = "创建日期";
+
+/* Class = "UILabel"; text = "Note title"; ObjectID = "Sob-ue-o2x"; */
+"Sob-ue-o2x.text" = "笔记标题";
+
+/* Class = "UILabel"; text = "Appear Options"; ObjectID = "Sz8-c6-Gq2"; */
+"Sz8-c6-Gq2.text" = "笔记列表选项";
+
+/* Class = "UILabel"; text = "Display body content"; ObjectID = "gT2-8n-pKN"; */
+"gT2-8n-pKN.text" = "显示正文内容";
+
+/* Class = "UIButton"; normalTitle = "S"; ObjectID = "joR-wB-WpG"; */
+"joR-wB-WpG.normalTitle" = "S";
+
+/* Class = "UIButton"; normalTitle = "L"; ObjectID = "lo0-az-E8n"; */
+"lo0-az-E8n.normalTitle" = "L";
+
+/* Class = "UIButton"; normalTitle = "×"; ObjectID = "o1G-4b-tg8"; */
+"o1G-4b-tg8.normalTitle" = "×";
+
+/* Class = "UINavigationItem"; title = "Apear Options"; ObjectID = "pEN-IF-5dH"; */
+"pEN-IF-5dH.title" = "显示选项";
+
+/* Class = "UILabel"; text = "Display image"; ObjectID = "u0b-Gn-csN"; */
+"u0b-Gn-csN.text" = "显示图片";
+
+/* Class = "UILabel"; text = "Updated date"; ObjectID = "xh9-yX-3rL"; */
+"xh9-yX-3rL.text" = "更新日期";

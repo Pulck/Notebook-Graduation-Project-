@@ -111,7 +111,7 @@ class ShortcutViewController: UITableViewController {
             data = notebookFetchedResultsController.object(at: indexPath)
         }
         
-        let action = UIContextualAction(style: .normal, title: "Delete") { (action, view, vertify) in
+        let action = UIContextualAction(style: .normal, title: NSLocalizedString("Delete", comment: "删除")) { (action, view, vertify) in
             if indexPath.section == 0 {
                 (data as! Note).isShortcut = false
             } else {

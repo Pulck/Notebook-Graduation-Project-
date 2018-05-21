@@ -171,21 +171,21 @@ class NoteListViewController: UITableViewController {
         let noteData = fetchedResultsController.object(at: indexPath)
         var actions = [UIContextualAction]()
         
-        let action = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+        let action = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "删除")) { [weak self] (action, view, completionHandler) in
             if self?.listType == .note {
                 noteData.notebook!.count -= 1
                 noteData.isInTrash = true
                 completionHandler(true)
             } else {
-                let alter = UIAlertController(title: "Note", message: "Delete?", preferredStyle: .alert)
-                let sureAction = UIAlertAction(title: "Sure", style: .destructive) { [weak self] (action) in
+                let alter = UIAlertController(title: NSLocalizedString("Note", comment: "注意"), message: NSLocalizedString("Delete?", comment: "是否删除"), preferredStyle: .alert)
+                let sureAction = UIAlertAction(title: NSLocalizedString("Sure", comment: "确定"), style: .destructive) { [weak self] (action) in
                     self?.context.delete(noteData)
                     completionHandler(true)
                     
                 }
                 alter.addAction(sureAction)
                 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "取消"), style: .cancel) {
                     (action) in
                     completionHandler(false)
                 }
@@ -197,7 +197,7 @@ class NoteListViewController: UITableViewController {
         actions.append(action)
         
         if listType == .trash {
-            let restoreAction = UIContextualAction(style: .normal, title: "Restore") { (action, view, completionHandler) in
+            let restoreAction = UIContextualAction(style: .normal, title: NSLocalizedString("Restore", comment: "恢复到原位置")) { (action, view, completionHandler) in
                 noteData.notebook!.count += 1
                 noteData.isInTrash = false
                 completionHandler(true)
@@ -221,6 +221,10 @@ class NoteListViewController: UITableViewController {
             let noteEditVC = segue.destination as! NoteEditViewController
             noteEditVC.noteData = noteCell.note
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return listType != .trash
     }
     
     @IBAction func noteButtonClick(_ sender: UIButton) {
@@ -273,24 +277,19 @@ class NoteListViewController: UITableViewController {
         let alterController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet
         )
         
-        let appearOptionsAction = UIAlertAction(title: "Appear Options", style: .default) { (action) in
+        let appearOptionsAction = UIAlertAction(title: NSLocalizedString("Appear Options", comment: "笔记列表选项"), style: .default) { (action) in
             self.presentAppearOptionsWindow()
         }
         alterController.addAction(appearOptionsAction)
         
         if listType == .trash {
-            let removeAction = UIAlertAction(title: "Remove All", style: .default) { (action) in
+            let removeAction = UIAlertAction(title: NSLocalizedString("Remove All", comment: "全部删除"), style: .default) { (action) in
                 
             }
             alterController.addAction(removeAction)
-        } else {
-            let notebookOptionsAction = UIAlertAction(title: "Notebook Options", style: .default) { (action) in
-                
-            }
-            alterController.addAction(notebookOptionsAction)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "取消"), style: .cancel, handler: nil)
         alterController.addAction(cancelAction)
         
         present(alterController, animated: true, completion: nil)

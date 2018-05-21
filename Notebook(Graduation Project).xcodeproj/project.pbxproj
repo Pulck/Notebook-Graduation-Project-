@@ -10,6 +10,8 @@
 		8406D7A02085EBB40027C20A /* FontSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D79F2085EBB40027C20A /* FontSettingView.swift */; };
 		8427D4BA2091B35E00D09904 /* SelectNotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D4B92091B35E00D09904 /* SelectNotebookViewController.swift */; };
 		8433763A208DD95B00F1E445 /* CreateNotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84337639208DD95B00F1E445 /* CreateNotebookViewController.swift */; };
+		8440F62720B2B2ED00C26656 /* AppearOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8440F62920B2B2ED00C26656 /* AppearOptions.storyboard */; };
+		8440F63020B2DC2F00C26656 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8440F63220B2DC2F00C26656 /* Localizable.strings */; };
 		8441EE8720B1813B00DD132B /* ListOptionsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441EE8620B1813B00DD132B /* ListOptionsKey.swift */; };
 		84477F7C20AD7C9E00D4ECED /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84477F7B20AD7C9E00D4ECED /* NoteCell.swift */; };
 		84628507203FA6A100DF787B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84628506203FA6A100DF787B /* AppDelegate.swift */; };
@@ -28,13 +30,12 @@
 		849E7888204E233700F219A5 /* NotebookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E7887204E233700F219A5 /* NotebookCell.swift */; };
 		849E788A204E84A500F219A5 /* NotebookHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E7889204E84A500F219A5 /* NotebookHeaderView.swift */; };
 		84B888C72045347D00388C51 /* AppearOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B888C62045347D00388C51 /* AppearOptionsViewController.swift */; };
-		84DFC89520466D5B00D3B288 /* AppearOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84DFC89420466D5A00D3B288 /* AppearOptions.storyboard */; };
+		84C430D820B28F7900CB976D /* NotebookSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84C430DA20B28F7900CB976D /* NotebookSettings.storyboard */; };
 		84DFC89A2046735F00D3B288 /* AppearOptionsPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFC8992046735F00D3B288 /* AppearOptionsPaneViewController.swift */; };
 		84E15CBC2053CA3800C4246D /* NotebookGroupSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E15CBB2053CA3800C4246D /* NotebookGroupSetting.swift */; };
 		84E15CC02053FFA900C4246D /* ShortcutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E15CBF2053FFA900C4246D /* ShortcutViewController.swift */; };
 		84E15CC220542FD700C4246D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E15CC120542FD700C4246D /* TabBarController.swift */; };
 		84E6C87220821D4C0090DF8B /* CustomInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6C87120821D4C0090DF8B /* CustomInputAccessoryView.swift */; };
-		84EF514B204FBAFA00E7A202 /* NotebookSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EF514A204FBAFA00E7A202 /* NotebookSettings.storyboard */; };
 		84EF514D204FC67C00E7A202 /* NotebookSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF514C204FC67C00E7A202 /* NotebookSettingsController.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,12 @@
 		8406D79F2085EBB40027C20A /* FontSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSettingView.swift; sourceTree = "<group>"; };
 		8427D4B92091B35E00D09904 /* SelectNotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNotebookViewController.swift; sourceTree = "<group>"; };
 		84337639208DD95B00F1E445 /* CreateNotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotebookViewController.swift; sourceTree = "<group>"; };
+		8440F62820B2B2ED00C26656 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AppearOptions.storyboard; sourceTree = "<group>"; };
+		8440F62B20B2B2F000C26656 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppearOptions.strings; sourceTree = "<group>"; };
+		8440F62D20B2B2F200C26656 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppearOptions.strings"; sourceTree = "<group>"; };
+		8440F63120B2DC2F00C26656 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8440F63320B2DC3400C26656 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8440F63420B2DC3A00C26656 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8441EE8620B1813B00DD132B /* ListOptionsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOptionsKey.swift; sourceTree = "<group>"; };
 		84477F7B20AD7C9E00D4ECED /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		84628503203FA6A100DF787B /* Notebook(Graduation Project).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notebook(Graduation Project).app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,13 +69,17 @@
 		849E7887204E233700F219A5 /* NotebookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCell.swift; sourceTree = "<group>"; };
 		849E7889204E84A500F219A5 /* NotebookHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookHeaderView.swift; sourceTree = "<group>"; };
 		84B888C62045347D00388C51 /* AppearOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearOptionsViewController.swift; sourceTree = "<group>"; };
-		84DFC89420466D5A00D3B288 /* AppearOptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AppearOptions.storyboard; sourceTree = "<group>"; };
+		84C430D520B27EEA00CB976D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		84C430D620B2812600CB976D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		84C430D720B2812600CB976D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		84C430D920B28F7900CB976D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NotebookSettings.storyboard; sourceTree = "<group>"; };
+		84C430DC20B28F7D00CB976D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NotebookSettings.strings; sourceTree = "<group>"; };
+		84C430DE20B28F7F00CB976D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NotebookSettings.strings"; sourceTree = "<group>"; };
 		84DFC8992046735F00D3B288 /* AppearOptionsPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearOptionsPaneViewController.swift; sourceTree = "<group>"; };
 		84E15CBB2053CA3800C4246D /* NotebookGroupSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookGroupSetting.swift; sourceTree = "<group>"; };
 		84E15CBF2053FFA900C4246D /* ShortcutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutViewController.swift; sourceTree = "<group>"; };
 		84E15CC120542FD700C4246D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		84E6C87120821D4C0090DF8B /* CustomInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessoryView.swift; sourceTree = "<group>"; };
-		84EF514A204FBAFA00E7A202 /* NotebookSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotebookSettings.storyboard; sourceTree = "<group>"; };
 		84EF514C204FC67C00E7A202 /* NotebookSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookSettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +126,7 @@
 		8462851C203FA93600DF787B /* Supports Files */ = {
 			isa = PBXGroup;
 			children = (
+				8440F63220B2DC2F00C26656 /* Localizable.strings */,
 				84628506203FA6A100DF787B /* AppDelegate.swift */,
 				8441EE8620B1813B00DD132B /* ListOptionsKey.swift */,
 				84628510203FA6A100DF787B /* Assets.xcassets */,
@@ -169,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				84B888C62045347D00388C51 /* AppearOptionsViewController.swift */,
-				84DFC89420466D5A00D3B288 /* AppearOptions.storyboard */,
+				8440F62920B2B2ED00C26656 /* AppearOptions.storyboard */,
 				84DFC8992046735F00D3B288 /* AppearOptionsPaneViewController.swift */,
 				84685637204D0FFB006E23F8 /* AppearOptionsWindow.swift */,
 			);
@@ -217,7 +229,7 @@
 		84EF5149204FBABC00E7A202 /* Notebook Settings */ = {
 			isa = PBXGroup;
 			children = (
-				84EF514A204FBAFA00E7A202 /* NotebookSettings.storyboard */,
+				84C430DA20B28F7900CB976D /* NotebookSettings.storyboard */,
 				84EF514C204FC67C00E7A202 /* NotebookSettingsController.swift */,
 				84E15CBB2053CA3800C4246D /* NotebookGroupSetting.swift */,
 			);
@@ -267,6 +279,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 846284FA203FA6A000DF787B;
 			productRefGroup = 84628504203FA6A100DF787B /* Products */;
@@ -284,9 +297,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				84628514203FA6A100DF787B /* LaunchScreen.storyboard in Resources */,
+				8440F63020B2DC2F00C26656 /* Localizable.strings in Resources */,
 				84628511203FA6A100DF787B /* Assets.xcassets in Resources */,
-				84EF514B204FBAFA00E7A202 /* NotebookSettings.storyboard in Resources */,
-				84DFC89520466D5B00D3B288 /* AppearOptions.storyboard in Resources */,
+				84C430D820B28F7900CB976D /* NotebookSettings.storyboard in Resources */,
+				8440F62720B2B2ED00C26656 /* AppearOptions.storyboard in Resources */,
 				8462850C203FA6A100DF787B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,10 +342,32 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		8440F62920B2B2ED00C26656 /* AppearOptions.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8440F62820B2B2ED00C26656 /* Base */,
+				8440F62B20B2B2F000C26656 /* en */,
+				8440F62D20B2B2F200C26656 /* zh-Hans */,
+			);
+			name = AppearOptions.storyboard;
+			sourceTree = "<group>";
+		};
+		8440F63220B2DC2F00C26656 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8440F63120B2DC2F00C26656 /* en */,
+				8440F63320B2DC3400C26656 /* Base */,
+				8440F63420B2DC3A00C26656 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		8462850A203FA6A100DF787B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8462850B203FA6A100DF787B /* Base */,
+				84C430D520B27EEA00CB976D /* en */,
+				84C430D620B2812600CB976D /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -340,8 +376,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				84628513203FA6A100DF787B /* Base */,
+				84C430D720B2812600CB976D /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		84C430DA20B28F7900CB976D /* NotebookSettings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84C430D920B28F7900CB976D /* Base */,
+				84C430DC20B28F7D00CB976D /* en */,
+				84C430DE20B28F7F00CB976D /* zh-Hans */,
+			);
+			name = NotebookSettings.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -351,6 +398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -410,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

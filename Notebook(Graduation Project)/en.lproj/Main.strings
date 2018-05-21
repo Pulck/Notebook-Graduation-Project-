@@ -1,0 +1,84 @@
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "2cL-2F-Hm4"; */
+"2cL-2F-Hm4.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "5Un-rW-1Cd"; */
+"5Un-rW-1Cd.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "Notebook Name"; ObjectID = "5zs-h0-ecG"; */
+"5zs-h0-ecG.placeholder" = "Notebook Name";
+
+/* Class = "UIButton"; normalTitle = "Font"; ObjectID = "Bkf-Fg-IaI"; */
+"Bkf-Fg-IaI.normalTitle" = "Font";
+
+/* Class = "UILabel"; text = "Notebook"; ObjectID = "EgS-4Z-rDd"; */
+"EgS-4Z-rDd.text" = "Notebook";
+
+/* Class = "UIViewController"; title = "Add Controller"; ObjectID = "MRP-bG-SRg"; */
+"MRP-bG-SRg.title" = "Add Controller";
+
+/* Class = "UIButton"; normalTitle = "I"; ObjectID = "O74-ld-I9P"; */
+"O74-ld-I9P.normalTitle" = "I";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "PHb-mC-49G"; */
+"PHb-mC-49G.normalTitle" = "B";
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "RLE-KS-wyF"; */
+"RLE-KS-wyF.placeholder" = "Title";
+
+/* Class = "UITabBarItem"; title = "Notebook"; ObjectID = "Tk4-4n-tNR"; */
+"Tk4-4n-tNR.title" = "Notebook";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "VpJ-Sg-vBm"; */
+"VpJ-Sg-vBm.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "M"; ObjectID = "XPb-km-f1L"; */
+"XPb-km-f1L.normalTitle" = "M";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "Yb8-Qk-bWf"; */
+"Yb8-Qk-bWf.text" = "Amount";
+
+/* Class = "UILabel"; text = "Notebook"; ObjectID = "Ygd-U7-c0C"; */
+"Ygd-U7-c0C.text" = "Notebook";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "aWd-KN-uUw"; */
+"aWd-KN-uUw.text" = "Date";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "hVc-Rz-ubR"; */
+"hVc-Rz-ubR.title" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "i1C-it-VpL"; */
+"i1C-it-VpL.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Ḏ"; ObjectID = "iEc-KE-t5y"; */
+"iEc-KE-t5y.normalTitle" = "Ḏ";
+
+/* Class = "UIButton"; normalTitle = "Notebook"; ObjectID = "jiV-Rk-Y2y"; */
+"jiV-Rk-Y2y.normalTitle" = "Notebook";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "nmp-BT-dwe"; */
+"nmp-BT-dwe.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Ƶ"; ObjectID = "oWj-2c-dlJ"; */
+"oWj-2c-dlJ.normalTitle" = "Ƶ";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "pMA-xM-1s5"; */
+"pMA-xM-1s5.text" = "Text";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "qLk-OL-BOe"; */
+"qLk-OL-BOe.text" = "Amount";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "rQo-kx-gv9"; */
+"rQo-kx-gv9.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "L"; ObjectID = "up6-OD-qw5"; */
+"up6-OD-qw5.normalTitle" = "L";
+
+/* Class = "UIButton"; normalTitle = "S"; ObjectID = "vP7-k9-YXH"; */
+"vP7-k9-YXH.normalTitle" = "S";
+
+/* Class = "UITabBarItem"; title = "Shortcut"; ObjectID = "vXT-Sk-buH"; */
+"vXT-Sk-buH.title" = "Shortcut";
+
+/* Class = "UILabel"; text = "Start Editing"; ObjectID = "xEn-BF-MJ5"; */
+"xEn-BF-MJ5.text" = "Start Editing";

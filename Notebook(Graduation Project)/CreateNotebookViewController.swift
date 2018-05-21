@@ -41,8 +41,8 @@ class CreateNotebookViewController: UIViewController {
                 
                 dismiss(animated: true, completion: nil)
             } else {
-                let alter = UIAlertController(title: "Core Data", message: "Had Created", preferredStyle: .alert)
-                alter.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+                let alter = UIAlertController(title: "Core Data", message: NSLocalizedString("Had Created", comment: "已被创建"), preferredStyle: .alert)
+                alter.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: "完成"), style: .default, handler: nil))
                 present(alter, animated: true, completion: nil)
             }
         }

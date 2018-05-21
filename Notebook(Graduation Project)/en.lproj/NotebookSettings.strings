@@ -1,0 +1,15 @@
+
+/* Class = "UINavigationItem"; title = "Notebook Settings"; ObjectID = "BBY-eB-KCs"; */
+"BBY-eB-KCs.title" = "Notebook Settings";
+
+/* Class = "UIButton"; normalTitle = "Delete Notebook"; ObjectID = "Rr9-Ay-Q4k"; */
+"Rr9-Ay-Q4k.normalTitle" = "Delete Notebook";
+
+/* Class = "UILabel"; text = "Add To Shortcut"; ObjectID = "hx8-wQ-euD"; */
+"hx8-wQ-euD.text" = "Add To Shortcut";
+
+/* Class = "UITableViewSection"; footerTitle = "10 notes"; ObjectID = "qjb-rS-g3s"; */
+"qjb-rS-g3s.footerTitle" = "10 notes";
+
+/* Class = "UITableViewSection"; headerTitle = "Notebook Name"; ObjectID = "qjb-rS-g3s"; */
+"qjb-rS-g3s.headerTitle" = "Notebook Name";
