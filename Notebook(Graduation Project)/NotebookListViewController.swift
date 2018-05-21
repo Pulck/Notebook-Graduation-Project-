@@ -205,6 +205,7 @@ extension NotebookListViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.text = nil
         searchBar.resignFirstResponder()
         fetchedResultController.setValue(fetchRequest(use: nil), forKey: "fetchRequest")
         do {

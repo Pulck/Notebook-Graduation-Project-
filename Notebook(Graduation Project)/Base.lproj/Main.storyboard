@@ -182,44 +182,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="pwB-Ij-VHq">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="pwB-Ij-VHq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIG-li-qf3">
-                                    <rect key="frame" x="2" y="-50" width="368" height="56"/>
-                                    <subviews>
-                                        <searchBar contentMode="redraw" backgroundImage="searchBarBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="NaO-g7-ef6">
-                                            <rect key="frame" x="0.0" y="0.0" width="272" height="56"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </searchBar>
-                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="240" horizontalCompressionResistancePriority="751" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="RpZ-88-x0R">
-                                            <rect key="frame" x="272" y="0.0" width="96" height="56"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWj-4a-lcW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="48" height="56"/>
-                                                    <state key="normal" image="tipIcon"/>
-                                                    <connections>
-                                                        <action selector="noteButtonClick:" destination="0un-Jd-F8R" eventType="touchUpInside" id="r7a-Z0-3Gh"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyq-0e-xgS">
-                                                    <rect key="frame" x="48" y="0.0" width="48" height="56"/>
-                                                    <state key="normal" image="notificationIcon"/>
-                                                    <connections>
-                                                        <action selector="notificationButtonClick:" destination="0un-Jd-F8R" eventType="touchUpInside" id="h3G-XO-8ca"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                </stackView>
+                                <searchBar contentMode="redraw" backgroundImage="searchBarBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="NaO-g7-ef6">
+                                    <rect key="frame" x="0.0" y="2" width="375" height="56"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="sIG-li-qf3" firstAttribute="leading" secondItem="pwB-Ij-VHq" secondAttribute="leading" constant="2" id="Udw-0e-uLC"/>
-                                <constraint firstAttribute="bottom" secondItem="sIG-li-qf3" secondAttribute="bottom" constant="5" id="Wpe-6k-p6W"/>
-                                <constraint firstAttribute="trailing" secondItem="sIG-li-qf3" secondAttribute="trailing" constant="5" id="gIi-EK-U8Z"/>
+                                <constraint firstAttribute="bottom" secondItem="NaO-g7-ef6" secondAttribute="bottom" constant="2" id="MYw-Iv-byg"/>
+                                <constraint firstItem="NaO-g7-ef6" firstAttribute="top" secondItem="pwB-Ij-VHq" secondAttribute="top" constant="2" id="Qf3-0W-SZc"/>
+                                <constraint firstAttribute="trailing" secondItem="NaO-g7-ef6" secondAttribute="trailing" id="iQi-Fv-ZJ7"/>
+                                <constraint firstItem="NaO-g7-ef6" firstAttribute="leading" secondItem="pwB-Ij-VHq" secondAttribute="leading" id="ptV-0j-rOo"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -309,8 +286,6 @@
                         </connections>
                     </navigationItem>
                     <connections>
-                        <outlet property="buttonArea" destination="RpZ-88-x0R" id="mpE-qe-hRo"/>
-                        <outlet property="searchArea" destination="sIG-li-qf3" id="Lju-gt-vwc"/>
                         <outlet property="searchBar" destination="NaO-g7-ef6" id="ZwX-fW-v5q"/>
                         <outlet property="searchView" destination="pwB-Ij-VHq" id="3gx-7g-siN"/>
                     </connections>
@@ -647,7 +622,7 @@
                     <viewLayoutGuide key="safeArea" id="Vsn-Tv-rGD"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2537" y="486"/>
+            <point key="canvasLocation" x="2537" y="485"/>
         </scene>
         <!--Notebook-->
         <scene sceneID="e82-0G-cgz">
@@ -929,13 +904,11 @@
         <image name="ReadIcon" width="1577" height="1577"/>
         <image name="Shortcut" width="32" height="32"/>
         <image name="TabBarImage" width="187" height="22"/>
-        <image name="notificationIcon" width="48" height="32"/>
         <image name="searchBarBackGround" width="368" height="45"/>
-        <image name="tipIcon" width="48" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VbM-Vc-v0u"/>
-        <segue reference="CaK-YI-gTY"/>
+        <segue reference="0GK-gX-SGU"/>
         <segue reference="L2d-Y0-1J6"/>
     </inferredMetricsTieBreakers>
 </document>

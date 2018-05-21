@@ -13,9 +13,7 @@ import CoreData
 class NoteListViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var searchArea: UIStackView!
     @IBOutlet weak var searchView: UIView!
-    @IBOutlet weak var buttonArea: UIStackView!
     
     let appearModeIndicator: ListAppearModeIndicator = {
         let defaults = UserDefaults.standard
@@ -113,7 +111,6 @@ class NoteListViewController: UITableViewController {
     
     
     func startSearch() {
-        buttonArea.isHidden = true
         searchBar.setShowsCancelButton(true, animated: true)
         
         dummyView.isHidden = false
@@ -126,7 +123,6 @@ class NoteListViewController: UITableViewController {
     @objc func endSearch() {
         searchBar.setShowsCancelButton(false, animated: false)
         searchBar.resignFirstResponder()
-        buttonArea.isHidden = false
         
         UIView.animate(withDuration: 0.3, animations: {
             self.dummyView.alpha = 0.0
@@ -227,18 +223,6 @@ class NoteListViewController: UITableViewController {
         return listType != .trash
     }
     
-    @IBAction func noteButtonClick(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func notificationButtonClick(_ sender: UIButton) {
-        if sender.currentImage == #imageLiteral(resourceName: "notificationIcon") {
-            sender.setImage(#imageLiteral(resourceName: "notification_selected"), for: .normal)
-        } else {
-            sender.setImage(#imageLiteral(resourceName: "notificationIcon"), for: .normal)
-        }
-    }
-    
     lazy var window: AppearOptionsWindow! = {
         let application =  UIApplication.shared
         let window = AppearOptionsWindow(frame: application.keyWindow!.frame)
@@ -283,8 +267,19 @@ class NoteListViewController: UITableViewController {
         alterController.addAction(appearOptionsAction)
         
         if listType == .trash {
-            let removeAction = UIAlertAction(title: NSLocalizedString("Remove All", comment: "全部删除"), style: .default) { (action) in
+            let removeAction = UIAlertAction(title: NSLocalizedString("Remove All", comment: "全部删除"), style: .default) { [unowned self] (action) in
+                let alter = UIAlertController(title: NSLocalizedString("Note", comment: "注意"), message: NSLocalizedString("Delete?", comment: "是否删除"), preferredStyle: .alert)
+                let sureAction = UIAlertAction(title: NSLocalizedString("Sure", comment: "确定"), style: .destructive) { (action) in
+                    for object in self.fetchedResultsController.sections![0].objects! {
+                        self.context.delete(object as! NSManagedObject)
+                    }
+                }
+                alter.addAction(sureAction)
                 
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "取消"), style: .cancel, handler: nil)
+                alter.addAction(cancelAction)
+                
+                self.present(alter, animated: true, completion: nil)
             }
             alterController.addAction(removeAction)
         }
