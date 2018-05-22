@@ -12,7 +12,13 @@ import CoreData
 
 class NoteListViewController: UITableViewController {
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            let localizedText = NSLocalizedString("Search in", comment: "笔记搜索框占位符")
+            let placeHolder = localizedText.replacingOccurrences(of: "*", with: title ?? "")
+            searchBar.placeholder = placeHolder
+        }
+    }
     @IBOutlet weak var searchView: UIView!
     
     let appearModeIndicator: ListAppearModeIndicator = {

@@ -11,7 +11,11 @@ import CoreData
 
 class NotebookListViewController: UITableViewController {
     
-    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var searchBar: UISearchBar! {
+        didSet {
+            searchBar.placeholder = NSLocalizedString("Search Noteboook", comment: "笔记本搜索框占位符")
+        }
+    }
     @IBOutlet var notebookHeaderView: UIView!
     
     lazy var fetchedResultController: NSFetchedResultsController<Notebook> = {

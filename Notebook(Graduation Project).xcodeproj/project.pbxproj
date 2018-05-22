@@ -71,7 +71,6 @@
 		84B888C62045347D00388C51 /* AppearOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearOptionsViewController.swift; sourceTree = "<group>"; };
 		84C430D520B27EEA00CB976D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		84C430D620B2812600CB976D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		84C430D720B2812600CB976D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		84C430D920B28F7900CB976D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NotebookSettings.storyboard; sourceTree = "<group>"; };
 		84C430DC20B28F7D00CB976D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NotebookSettings.strings; sourceTree = "<group>"; };
 		84C430DE20B28F7F00CB976D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NotebookSettings.strings"; sourceTree = "<group>"; };
@@ -376,7 +375,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				84628513203FA6A100DF787B /* Base */,
-				84C430D720B2812600CB976D /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

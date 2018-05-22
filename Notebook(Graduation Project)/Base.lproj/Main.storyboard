@@ -187,7 +187,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <searchBar contentMode="redraw" backgroundImage="searchBarBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="NaO-g7-ef6">
-                                    <rect key="frame" x="0.0" y="2" width="375" height="56"/>
+                                    <rect key="frame" x="2" y="2" width="371" height="56"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                             </subviews>
@@ -195,8 +195,8 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="NaO-g7-ef6" secondAttribute="bottom" constant="2" id="MYw-Iv-byg"/>
                                 <constraint firstItem="NaO-g7-ef6" firstAttribute="top" secondItem="pwB-Ij-VHq" secondAttribute="top" constant="2" id="Qf3-0W-SZc"/>
-                                <constraint firstAttribute="trailing" secondItem="NaO-g7-ef6" secondAttribute="trailing" id="iQi-Fv-ZJ7"/>
-                                <constraint firstItem="NaO-g7-ef6" firstAttribute="leading" secondItem="pwB-Ij-VHq" secondAttribute="leading" id="ptV-0j-rOo"/>
+                                <constraint firstAttribute="trailing" secondItem="NaO-g7-ef6" secondAttribute="trailing" constant="2" id="iQi-Fv-ZJ7"/>
+                                <constraint firstItem="NaO-g7-ef6" firstAttribute="leading" secondItem="pwB-Ij-VHq" secondAttribute="leading" constant="2" id="ptV-0j-rOo"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -276,7 +276,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="hVc-Rz-ubR">
-                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="edP-rr-HHH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="edP-rr-HHH">
                             <connections>
                                 <action selector="optionButtonClick:" destination="0un-Jd-F8R" id="j1v-ee-TZD"/>
                             </connections>
@@ -909,6 +909,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="VbM-Vc-v0u"/>
         <segue reference="0GK-gX-SGU"/>
-        <segue reference="L2d-Y0-1J6"/>
+        <segue reference="9D6-3R-DI0"/>
     </inferredMetricsTieBreakers>
 </document>
