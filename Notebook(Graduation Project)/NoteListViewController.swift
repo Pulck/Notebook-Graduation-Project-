@@ -268,7 +268,7 @@ class NoteListViewController: UITableViewController {
         
         if listType == .trash {
             let removeAction = UIAlertAction(title: NSLocalizedString("Remove All", comment: "全部删除"), style: .default) { [unowned self] (action) in
-                let alter = UIAlertController(title: NSLocalizedString("Note", comment: "注意"), message: NSLocalizedString("Delete?", comment: "是否删除"), preferredStyle: .alert)
+                let alter = UIAlertController(title: NSLocalizedString("Note", comment: "注意"), message: NSLocalizedString("This will delete all notes here!", comment: "全部删除提示"), preferredStyle: .alert)
                 let sureAction = UIAlertAction(title: NSLocalizedString("Sure", comment: "确定"), style: .destructive) { (action) in
                     for object in self.fetchedResultsController.sections![0].objects! {
                         self.context.delete(object as! NSManagedObject)

@@ -12,21 +12,21 @@ class AppearOptionsViewController: UIViewController {
 
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var optionsPane: UIView!
-    @IBOutlet weak var height: NSLayoutConstraint!
+    var height: NSLayoutConstraint!
     
     weak var window: AppearOptionsWindow!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        height = coverView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1.0 / 3, constant: 0)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(resignOptionsPane))
         coverView.addGestureRecognizer(tap)
-        presentOptionsPane()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presentOptionsPane()
     }
     
     @IBAction func closeButtonClick(_ sender: UIButton) {
@@ -34,26 +34,25 @@ class AppearOptionsViewController: UIViewController {
     }
     
     func presentOptionsPane() {
-//        height.constant = -UIScreen.main.bounds.height * 2.0 / 3//测试弹出动画需要取消注释
-        UIView.animate(withDuration: 0.3) {
+        height.isActive = true//测试弹出动画需要取消注释
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             self.coverView.alpha = 0.3
-//            self.view.layoutIfNeeded()//测试弹出动画需要取消注释
-        }
+            self.view.layoutIfNeeded()//测试弹出动画需要取消注释
+        }, completion: nil)
     }
     
     @objc func resignOptionsPane() {
         let window = UIApplication.shared.delegate?.window!
-        height.constant = 0
+        height.isActive = false
         UIView.animate(withDuration: 0.2, animations: {
             self.coverView.alpha = 0.0
-//            self.view.layoutIfNeeded()//测试弹出动画需要取消注释
+            self.view.layoutIfNeeded()//测试弹出动画需要取消注释
         }) { (finished) in
             if finished {
                 window?.makeKeyAndVisible()
             }
         }
     }
-    
     
     // MARK: - Navigation
 
