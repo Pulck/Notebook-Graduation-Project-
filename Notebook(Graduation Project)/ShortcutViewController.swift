@@ -81,7 +81,7 @@ class ShortcutViewController: UITableViewController {
             let fixIndexPath = IndexPath(row: indexPath.row, section: 0)
             let notebookData = notebookFetchedResultsController.object(at: fixIndexPath)
             notebookCell.noteTitle.text = notebookData.name
-            notebookCell.noteCount.text = "\(notebookData.count)"
+            notebookCell.noteCount.text = "(\(notebookData.count))"
             notebookCell.separatorLine.isHidden = (indexPath.row == lastRow(for: indexPath.section))
         default:
             preconditionFailure("not found shortcut type")

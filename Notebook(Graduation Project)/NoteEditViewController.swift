@@ -23,6 +23,7 @@ class NoteEditViewController: UIViewController {
     var imageKeyMap = [NSTextAttachment : String]()
     var imageKeys = [String]()
     var context = AppDelegate.viewContext
+    var initialEditableState = false
     
     var noteData: Note!
     
@@ -32,7 +33,12 @@ class NoteEditViewController: UIViewController {
         noteDataInit()
         
         textView.delegate = self
-        textView.isEditable = false
+        textView.isEditable = initialEditableState
+        if initialEditableState == true {
+            editableTipsImageView.image = #imageLiteral(resourceName: "Pencil")
+        } else {
+            editableTipsImageView.image = #imageLiteral(resourceName: "ReadIcon")
+        }
         
         if !textView.text.isEmpty {
             tipsLabel.isHidden = true
@@ -153,6 +159,7 @@ class NoteEditViewController: UIViewController {
     let isShowKeyboardGesture: (_ gesture: UIGestureRecognizer) -> Bool = { $0 is UITapGestureRecognizer &&
         ($0 as! UITapGestureRecognizer).numberOfTapsRequired == 1 }
     @objc func doubleTap(_ sender: UIGestureRecognizer) {
+        textView.inputView = nil
         textView.isEditable = !textView.isEditable
         if textView.isEditable {
             textView.inputAccessoryView = accessoryView

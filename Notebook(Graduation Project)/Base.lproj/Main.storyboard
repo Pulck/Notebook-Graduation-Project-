@@ -182,12 +182,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="pwB-Ij-VHq">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="pwB-Ij-VHq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <searchBar contentMode="redraw" backgroundImage="searchBarBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="NaO-g7-ef6">
-                                    <rect key="frame" x="2" y="2" width="371" height="56"/>
+                                    <rect key="frame" x="2" y="2" width="371" height="7"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                             </subviews>
@@ -426,15 +426,13 @@
                                     <constraint firstAttribute="height" constant="44" id="Qbh-O0-Sxj"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Item" id="rQo-kx-gv9"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3Qf-gd-1GM"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="FlR-wY-8MS"/>
                                     <barButtonItem systemItem="camera" id="vLT-Lu-MVe">
                                         <connections>
                                             <action selector="cameraButton:" destination="1hO-fU-eiS" id="F3p-Dt-T89"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="2Vy-6w-0sW"/>
-                                    <barButtonItem systemItem="organize" id="TkE-ih-rhK"/>
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ReadIcon" translatesAutoresizingMaskIntoConstraints="NO" id="utX-eQ-XkU">
@@ -610,7 +608,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bkf-Fg-IaI">
-                            <rect key="frame" x="172" y="2" width="31" height="30"/>
+                            <rect key="frame" x="251" y="2" width="31" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Font"/>
                             <connections>
@@ -908,7 +906,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VbM-Vc-v0u"/>
-        <segue reference="0GK-gX-SGU"/>
-        <segue reference="9D6-3R-DI0"/>
+        <segue reference="CaK-YI-gTY"/>
+        <segue reference="L2d-Y0-1J6"/>
     </inferredMetricsTieBreakers>
 </document>

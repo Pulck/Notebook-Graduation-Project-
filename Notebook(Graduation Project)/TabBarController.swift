@@ -42,6 +42,7 @@ extension TabBarController: UITabBarControllerDelegate {
         noteEditVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title: doneString, style: .done, target: noteEditVC, action: #selector(noteEditVC.backAndSave))
         noteEditVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: cancelString, style: .plain, target: noteEditVC, action: #selector(noteEditVC.backAndDelete))
         noteEditVC.noteData = nil
+        noteEditVC.initialEditableState = true
         present(navigationController, animated: true, completion: nil)
     }
     
