@@ -98,6 +98,7 @@
 		846284FA203FA6A000DF787B = {
 			isa = PBXGroup;
 			children = (
+				849F51B320C3BB3C00D18CCD /* README.md */,
 				84628505203FA6A100DF787B /* Notebook(Graduation Project) */,
 				84628504203FA6A100DF787B /* Products */,
 			);
@@ -127,7 +128,6 @@
 		8462851C203FA93600DF787B /* Supports Files */ = {
 			isa = PBXGroup;
 			children = (
-				849F51B320C3BB3C00D18CCD /* README.md */,
 				8440F63220B2DC2F00C26656 /* Localizable.strings */,
 				84628506203FA6A100DF787B /* AppDelegate.swift */,
 				8441EE8620B1813B00DD132B /* ListOptionsKey.swift */,
