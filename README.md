@@ -1,5 +1,5 @@
 # Notebook
-![build status](https://travis-ci.com/Pulck/Notebook-Graduation-Project-)
+[![Build Status](https://travis-ci.com/Pulck/Notebook-Graduation-Project-.svg?token=KhBibW4xhMwcevsRbq32&branch=master)](https://travis-ci.com/Pulck/Notebook-Graduation-Project-)
 # 简介
 该App为个人制作的毕业设计。最终只完成了部分功能，功能如下：
 1. 创建和删除笔记本
