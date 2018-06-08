@@ -1,4 +1,4 @@
 osx_image: xcode9.3
 language: swift
 xcode_project: Notebook(Graduation Project).xcodeproj
-xcode_scheme: UITests
+xcode_scheme: Notebook(Graduation Project)
