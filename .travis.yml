@@ -3,4 +3,4 @@ language: swift
 xcode_project: Notebook(Graduation Project).xcodeproj
 xcode_scheme: Notebook(Graduation Project)
 script:
-    - xcodebuild build clean CODE_SIGNING_REQUIRED=NO
+    - xcodebuild build clean -project Notebook(Graduation Project).xcodeproj -scheme Notebook(Graduation Project) CODE_SIGNING_REQUIRED=NO
