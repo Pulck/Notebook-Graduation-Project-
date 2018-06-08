@@ -3,4 +3,4 @@ language: swift
 xcode_project: Notebook(Graduation Project).xcodeproj
 xcode_scheme: Notebook(Graduation Project)
 script:
-    - xcodebuild -sdk iphonesimulator CODE_SIGNING_REQUIRED=NO
+    - xcodebuild CODE_SIGNING_REQUIRED=NO
