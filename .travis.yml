@@ -3,4 +3,4 @@ language: swift
 xcode_project: Notebook(Graduation Project).xcodeproj
 xcode_scheme: Notebook(Graduation Project)
 script:
-    - xcodebuild -sdk iphonesimulator -project Notebook\(Graduation Project\).xcodeproj -scheme Notebook\(Graduation Project\) ONLY_ACTIVE_ARCH=NO"
+    - xcodebuild -sdk iphonesimulator -project Notebook(Graduation Project).xcodeproj -scheme Notebook(Graduation Project) ONLY_ACTIVE_ARCH=NO
