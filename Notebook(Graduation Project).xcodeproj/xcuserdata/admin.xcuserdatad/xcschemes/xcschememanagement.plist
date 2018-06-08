@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>UITests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>845A3C4920CA1E2F00F8E25D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>84628502203FA6A000DF787B</key>
 		<dict>
 			<key>primary</key>
